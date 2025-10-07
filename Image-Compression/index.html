@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compress images online with our free, fast, and SEO-optimized image compression tool. Adjust compression level and download optimized images instantly.">
+    <meta name="keywords" content="image compression, online image optimizer, reduce image size, compress jpg, compress png">
+    <meta name="author" content="Image Compression Tool">
+    <title>Online Image Compression Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google AdSense placeholder -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      // Replace 'YOUR-AD-UNIT-ID' with your actual AdSense Ad Unit ID
+      window.adsbygoogle = window.adsbygoogle || [];
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">ImageCompressor</a>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="compressor-section">
+            <h1>Online Image Compression Tool</h1>
+            <p>Reduce your image size instantly while maintaining quality. Select your compression level and optimize your images for web, email, or social media.</p>
+            <form id="compressForm">
+                <label for="imageInput">Choose an image to compress:</label>
+                <input type="file" id="imageInput" accept="image/*" required>
+                <div id="previewContainer">
+                    <img id="imagePreview" src="#" alt="Image Preview" style="display:none;"/>
+                </div>
+                <div id="originalSpecs" class="image-specs" style="display:none;">
+                    <h3>Original Image Specifications</h3>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Dimensions:</span>
+                            <span class="spec-value" id="originalDimensions">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">File Size:</span>
+                            <span class="spec-value" id="originalSize">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Format:</span>
+                            <span class="spec-value" id="originalFormat">-</span>
+                        </div>
+                    </div>
+                </div>
+                <label for="compressionRange">Compression Level: <span id="compressionValue">70</span>%</label>
+                <input type="range" id="compressionRange" min="10" max="100" value="70">
+                <button type="submit">Compress & Download</button>
+            </form>
+            <div id="outputContainer" style="display:none;">
+                <h2>Compressed Image</h2>
+                <img id="compressedImage" src="#" alt="Compressed Image"/>
+                <div id="compressedSpecs" class="image-specs">
+                    <h3>Compressed Image Specifications</h3>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Dimensions:</span>
+                            <span class="spec-value" id="compressedDimensions">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">File Size:</span>
+                            <span class="spec-value" id="compressedSize">-</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Format:</span>
+                            <span class="spec-value" id="compressedFormat">JPEG</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Compression Ratio:</span>
+                            <span class="spec-value" id="compressionRatio">-</span>
+                        </div>
+                    </div>
+                    <div class="compression-ratio" id="compressionRatioDisplay"></div>
+                </div>
+                <a id="downloadBtn" href="#" download="compressed-image.jpg">Download Compressed Image</a>
+            </div>
+        </section>
+        <aside class="ad-space">
+            <!-- Google AdSense Ad Unit Placeholder -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
+                 data-ad-slot="YOUR-AD-UNIT-ID"
+                 data-ad-format="auto"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </aside>
+    </main>
+    <footer>
+        <p>&copy; 2024 ImageCompressor. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html> 
