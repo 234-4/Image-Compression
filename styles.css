@@ -31,6 +31,25 @@ nav .logo {
     color: #fff;
     text-decoration: none;
 }
+nav .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+/* Logo image in navbar */
+
+ .nav-logo-img {
+  height: 60px; /* increase from 40px */
+  width: auto;  /* keeps aspect ratio */
+  object-fit: contain; /* ensures it doesn't stretch */
+  vertical-align: middle; /* aligns with text nicely */
+}
+
+.logo-text {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
 nav ul {
     list-style: none;
     display: flex;
@@ -91,6 +110,16 @@ main {
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
+/* Hidden by default; JS will toggle these classes when needed */
+#imagePreview {
+    display: none;
+}
+#originalSpecs {
+    display: none;
+}
+#outputContainer {
+    display: none;
+}
 label[for="compressionRange"] {
     font-weight: 500;
 }
@@ -144,6 +173,11 @@ button[type="submit"]:hover {
     width: 100%;
     min-height: 90px;
 }
+
+/* make sure the ad placeholder occupies space by default */
+.adsbygoogle {
+    display: block;
+}
 footer {
     background: #222;
     color: #fff;
@@ -155,6 +189,10 @@ footer {
 @media (max-width: 700px) {
     nav ul {
         gap: 1rem;
+    }
+    /* Hide the logo text on small screens to save space */
+    .logo-text {
+        display: none;
     }
     .compressor-section, .ad-space {
         max-width: 100%;

@@ -18,7 +18,10 @@
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo">ImageCompressor</a>
+            <a href="index.html" class="logo">
+                <img src="assets/img-logo.png" alt="Logo" class="nav-logo-img"/>
+                <span class="logo-text"></span>
+            </a>
             <ul>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
@@ -34,9 +37,9 @@
                 <label for="imageInput">Choose an image to compress:</label>
                 <input type="file" id="imageInput" accept="image/*" required>
                 <div id="previewContainer">
-                    <img id="imagePreview" src="#" alt="Image Preview" style="display:none;"/>
+                    <img id="imagePreview" src="#" alt="Image Preview" />
                 </div>
-                <div id="originalSpecs" class="image-specs" style="display:none;">
+                    <div id="originalSpecs" class="image-specs">
                     <h3>Original Image Specifications</h3>
                     <div class="specs-grid">
                         <div class="spec-item">
@@ -57,7 +60,7 @@
                 <input type="range" id="compressionRange" min="10" max="100" value="70">
                 <button type="submit">Compress & Download</button>
             </form>
-            <div id="outputContainer" style="display:none;">
+                <div id="outputContainer">
                 <h2>Compressed Image</h2>
                 <img id="compressedImage" src="#" alt="Compressed Image"/>
                 <div id="compressedSpecs" class="image-specs">
@@ -87,8 +90,7 @@
         </section>
         <aside class="ad-space">
             <!-- Google AdSense Ad Unit Placeholder -->
-            <ins class="adsbygoogle"
-                 style="display:block"
+          <ins class="adsbygoogle"
                  data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
                  data-ad-slot="YOUR-AD-UNIT-ID"
                  data-ad-format="auto"></ins>
