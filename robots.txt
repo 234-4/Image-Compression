@@ -1,0 +1,14 @@
+# robots.txt for https://www.imgcompressor.shop/
+
+User-agent: *
+# Allow all important pages
+Allow: /
+
+# Block admin or hidden folders (if any exist)
+Disallow: /admin/
+Disallow: /uploads/
+Disallow: /temp/
+Disallow: /test/
+
+# Point search engines to your sitemap
+Sitemap: https://www.imgcompressor.shop/sitemap.xml
