@@ -161,74 +161,7 @@
     font-size: 24px;
   }
 }
-        .faq-section {
-  max-width: 800px;
-  margin: 60px auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
-.faq-title {
-  text-align: center;
-  font-size: 28px;
-  margin-bottom: 30px;
-  color: #000;
-}
-
-.faq-item {
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 10px;
-}
-
-.faq-question {
-  width: 100%;
-  background: #f9f9f9;
-  color: #000;
-  padding: 16px;
-  font-size: 16px;
-  font-weight: 600;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.faq-question:hover {
-  background: #eee;
-}
-
-.faq-icon {
-  font-size: 20px;
-  transition: transform 0.3s ease;
-}
-
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  background: #fff;
-}
-
-.faq-answer p {
-  padding: 15px;
-  margin: 0;
-  color: #333;
-  line-height: 1.6;
-}
-
-.faq-item.active .faq-answer {
-  max-height: 200px;
-}
-
-.faq-item.active .faq-icon {
-  transform: rotate(45deg);
-}
-
-
-
-        
+    
     </style>
 </head>
 <body>
@@ -279,80 +212,6 @@
     <button type="submit">Send Message</button>
   </form>
 </div>
-<section class="faq-section">
-  <h2 class="faq-title">Frequently Asked Questions</h2>
-
-  <div class="faq-item">
-    <button class="faq-question">
-      What is IMGCompressor.shop?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-answer">
-      <p>IMGCompressor.shop is a free online image compression tool that reduces image file size without noticeable loss in quality.</p>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <button class="faq-question">
-      Is IMGCompressor.shop free to use?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-answer">
-      <p>Yes, the tool is completely free. No registration, login, or payment is required.</p>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <button class="faq-question">
-      Which image formats are supported?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-answer">
-      <p>You can compress JPG, JPEG, PNG, and WebP images using IMGCompressor.shop.</p>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <button class="faq-question">
-      Does image compression reduce quality?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-answer">
-      <p>The tool uses smart compression to maintain visual quality while significantly reducing file size.</p>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <button class="faq-question">
-      Are my images safe?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-answer">
-      <p>Your images are processed securely and are not stored permanently on any server.</p>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <button class="faq-question">
-      Do I need to install any software?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-answer">
-      <p>No installation is required. IMGCompressor.shop works directly in your browser.</p>
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <button class="faq-question">
-      Why should I compress images?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-answer">
-      <p>Compressed images load faster, improve website speed, save storage space, and help with SEO.</p>
-    </div>
-  </div>
-</section>
-
 
 <p id="status"></p>
 
@@ -379,21 +238,6 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
   document.getElementById("status").innerText = "Sending...";
 });
 </script>
-    <script>
-  document.querySelectorAll(".faq-question").forEach(button => {
-    button.addEventListener("click", () => {
-      const faqItem = button.parentElement;
-      faqItem.classList.toggle("active");
-
-      document.querySelectorAll(".faq-item").forEach(item => {
-        if (item !== faqItem) {
-          item.classList.remove("active");
-        }
-      });
-    });
-  });
-</script>
-
 
 </body>
 </html> 
