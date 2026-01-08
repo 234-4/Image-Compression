@@ -185,71 +185,6 @@
   color: #fff;
   cursor: pointer;
 }
-/* DESKTOP STYLES */
-.desktop-nav {
-  display: flex; /* normal horizontal menu on desktop */
-}
-
-.menu-toggle {
-  display: none; /* hidden on desktop */
-}
-
-/* MOBILE STYLES */
-@media (max-width: 767px) {
-
-  /* Hide desktop menu by default on mobile */
-  .desktop-nav {
-    display: none !important; /* critical to hide desktop nav on mobile */
-    flex-direction: column;
-    width: 100%;
-    background: #222; /* header background */
-    position: absolute;
-    top: 60px; /* adjust to your header height */
-    left: 0;
-    border-top: 1px solid #444;
-    z-index: 999;
-  }
-
-  /* Show hamburger button */
-  .menu-toggle {
-    display: block;
-    font-size: 24px;
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  /* Submenus hidden by default */
-  .desktop-nav .submenu {
-    display: none;
-    flex-direction: column;
-    background: #333;
-  }
-
-  /* Open submenu */
-  .desktop-nav li.open > .submenu {
-    display: flex;
-  }
-
-  /* Menu links styling for mobile */
-  .desktop-nav li a,
-  .desktop-nav li button {
-    display: block;
-    padding: 12px 16px;
-    color: #fff;
-    text-decoration: none;
-    width: 100%;
-    text-align: left;
-    border-bottom: 1px solid #444;
-    background: none;
-    cursor: pointer;
-  }
-
-  .desktop-nav li {
-    border-bottom: 1px solid #444;
-  }
-}
 
    </style>
 
@@ -271,35 +206,6 @@
         </nav>
 
     </header>
-<header class="site-header">
-  <div class="header-inner">
-    <!-- Logo -->
-    <a href="/" class="logo">
-      <img src="logo.png" alt="Image Compressor">
-    </a>
-
-    <!-- Mobile Hamburger Toggle -->
-    <button class="menu-toggle" aria-label="Open Menu">☰</button>
-
-    <!-- Desktop Menu (existing menu, unchanged) -->
-    <nav class="desktop-nav">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li class="has-submenu">
-          <button>Tools ▾</button>
-          <ul class="submenu">
-            <li><a href="/image-compressor.html">Image Compressor</a></li>
-            <li><a href="/image-resizer.html">Image Resizer</a></li>
-            <li><a href="/image-converter.html">Image Converter</a></li>
-          </ul>
-        </li>
-        <li><a href="/blog/">Blog</a></li>
-        <li><a href="/faq.html">FAQ</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
 
 
 
@@ -567,27 +473,6 @@ window.addEventListener("load", () => {
   const savedLang = localStorage.getItem("preferredLang") || "en";
   languageSelector.value = savedLang;
   setLanguage();
-});
-</script>
-<script>
-const menuToggle = document.querySelector('.menu-toggle');
-const desktopNav = document.querySelector('.desktop-nav');
-
-// Toggle mobile menu
-menuToggle.addEventListener('click', () => {
-  if (desktopNav.style.display === 'flex') {
-    desktopNav.style.display = 'none';
-  } else {
-    desktopNav.style.display = 'flex';
-    desktopNav.style.flexDirection = 'column';
-  }
-});
-
-// Toggle submenus
-desktopNav.querySelectorAll('.has-submenu > button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    btn.parentElement.classList.toggle('open');
-  });
 });
 </script>
 
