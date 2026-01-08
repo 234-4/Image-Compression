@@ -185,60 +185,57 @@
   color: #fff;
   cursor: pointer;
 }
-/* Hide mobile menu & toggle on desktop */
-.mobile-menu-toggle,
-.mobile-nav {
-  display: none;
-}
-
-/* Desktop nav default */
+/* Desktop menu visible by default */
 .desktop-nav {
-  display: flex; /* visible on desktop */
+  display: flex;
 }
 
-/* Mobile styles */
+/* Hide toggle button on desktop */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* MOBILE */
 @media (max-width: 767px) {
+  /* Hide desktop menu initially */
   .desktop-nav {
-    display: none; /* hide desktop nav on mobile */
-  }
-
-  .mobile-menu-toggle {
-    display: block;
-    font-size: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-  .mobile-nav {
     display: none;
     flex-direction: column;
     width: 100%;
     background: #fff;
-    position: fixed;
-    top: 60px; /* adjust to header height */
+    position: absolute;
+    top: 60px; /* adjust for header height */
     left: 0;
     border-top: 1px solid #eee;
-    max-height: calc(100vh - 60px);
-    overflow-y: auto;
     z-index: 999;
   }
 
-  .mobile-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .mobile-nav li {
-    border-bottom: 1px solid #f1f1f1;
-  }
-
-  .mobile-nav a,
-  .submenu-toggle {
+  /* Show toggle button */
+  .menu-toggle {
     display: block;
-    width: 100%;
+  }
+
+  /* Submenus hidden by default */
+  .desktop-nav .submenu {
+    display: none;
+    flex-direction: column;
+    background: #f9f9f9;
+  }
+
+  /* Submenu open state */
+  .desktop-nav li.open > .submenu {
+    display: flex;
+  }
+
+  /* Menu links styling for mobile */
+  .desktop-nav li a,
+  .desktop-nav li button {
     padding: 14px 18px;
+    width: 100%;
     text-align: left;
     background: none;
     border: none;
@@ -247,14 +244,8 @@
     cursor: pointer;
   }
 
-  .mobile-nav .submenu {
-    display: none;
-    flex-direction: column;
-    background: #f9f9f9;
-  }
-
-  .mobile-nav li.open > .submenu {
-    display: flex;
+  .desktop-nav li {
+    border-bottom: 1px solid #eee;
   }
 }
 
@@ -278,16 +269,14 @@
         </nav>
 
     </header>
-    <header class="site-header">
+  <header class="site-header">
   <div class="header-inner">
     <a href="/" class="logo">ImgCompressor</a>
 
-    <!-- Hamburger for Mobile -->
-    <button class="mobile-menu-toggle" aria-label="Open Menu" aria-expanded="false">
-      ☰
-    </button>
+    <!-- Mobile toggle button -->
+    <button class="menu-toggle" aria-label="Open Menu">☰</button>
 
-    <!-- Desktop Menu (existing, unchanged) -->
+    <!-- Existing desktop menu -->
     <nav class="desktop-nav">
       <ul>
         <li><a href="/">Home</a></li>
@@ -305,25 +294,8 @@
       </ul>
     </nav>
   </div>
-
-  <!-- Mobile Menu -->
-  <nav class="mobile-nav">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li class="has-submenu">
-        <button class="submenu-toggle">Tools ▾</button>
-        <ul class="submenu">
-          <li><a href="/image-compressor.html">Image Compressor</a></li>
-          <li><a href="/image-resizer.html">Image Resizer</a></li>
-          <li><a href="/image-converter.html">Image Converter</a></li>
-        </ul>
-      </li>
-      <li><a href="/blog/">Blog</a></li>
-      <li><a href="/faq.html">FAQ</a></li>
-      <li><a href="/contact.html">Contact</a></li>
-    </ul>
-  </nav>
 </header>
+
 
      <main>
         <section class="compressor-section">
@@ -592,21 +564,27 @@ window.addEventListener("load", () => {
 });
 </script>
 <script>
-  const mobileToggle = document.querySelector('.mobile-menu-toggle');
-  const mobileNav = document.querySelector('.mobile-nav');
+  const menuToggle = document.querySelector('.menu-toggle');
+  const desktopNav = document.querySelector('.desktop-nav');
 
-  // Toggle mobile menu
-  mobileToggle.addEventListener('click', () => {
-    mobileNav.style.display = mobileNav.style.display === 'flex' ? 'none' : 'flex';
+  // Toggle main menu on mobile
+  menuToggle.addEventListener('click', () => {
+    if (desktopNav.style.display === 'flex') {
+      desktopNav.style.display = 'none';
+    } else {
+      desktopNav.style.display = 'flex';
+      desktopNav.style.flexDirection = 'column';
+    }
   });
 
-  // Toggle mobile submenu
-  mobileNav.querySelectorAll('.submenu-toggle').forEach(btn => {
+  // Toggle submenus on mobile
+  desktopNav.querySelectorAll('.has-submenu > button').forEach(btn => {
     btn.addEventListener('click', () => {
       btn.parentElement.classList.toggle('open');
     });
   });
 </script>
+
 
 </body>
 </html> 
