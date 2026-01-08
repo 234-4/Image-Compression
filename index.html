@@ -185,6 +185,88 @@
   color: #fff;
   cursor: pointer;
 }
+       /* Add these styles to your existing CSS section */
+.nav-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: #fff;
+        cursor: pointer;
+        padding: 10px;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+        z-index: 1000;
+    }
+
+    nav {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        position: absolute;
+        top: 70px;
+        left: 0;
+        z-index: 999;
+        padding: 20px 0;
+        margin: 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 15px 20px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: background-color 0.3s;
+    }
+
+    nav ul li a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    nav ul li:last-child a {
+        border-bottom: none;
+    }
+
+    .logo {
+        z-index: 1001;
+        position: relative;
+    }
+}
+
+/* Add smooth transition */
+nav ul {
+    transition: all 0.3s ease-in-out;
+}
+
 
    </style>
 
@@ -206,6 +288,25 @@
         </nav>
 
     </header>
+<!-- Add this to your header section, right after the nav opening tag -->
+<header>
+    <nav>
+        <button class="nav-toggle" aria-label="Toggle navigation menu">
+            ☰
+        </button>
+        
+        <a href="index.html" class="logo">
+            <img src="assets/img-logo.png" alt="IMGCompressor.shop – Free Online Image Compressor" class="nav-logo-img"/>
+            <span class="logo-text"></span>
+        </a>
+        <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="blog/how-image-compression-improves-seo.html">Blog</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+    </nav>
+</header>
 
 
 
@@ -475,7 +576,51 @@ window.addEventListener("load", () => {
   setLanguage();
 });
 </script>
-
+<!-- Add this JavaScript at the end of your existing script section -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('nav ul');
+    
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            
+            // Change hamburger icon
+            if (navMenu.classList.contains('active')) {
+                navToggle.innerHTML = '✕';
+            } else {
+                navToggle.innerHTML = '☰';
+            }
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!navMenu.contains(event.target) && !navToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+                navToggle.innerHTML = '☰';
+            }
+        });
+        
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                navToggle.innerHTML = '☰';
+            });
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                navMenu.classList.remove('active');
+                navToggle.innerHTML = '☰';
+            }
+        });
+    }
+});
+</script>
 
 </body>
 </html> 
