@@ -185,6 +185,19 @@
                 <li><a href="privacy.html">Privacy Policy</a></li>
             </ul>
         </nav>
+        <header>
+  <!-- your existing logo/menu -->
+
+  <select id="languageSelector" onchange="setLanguage()">
+    <option value="en">English</option>
+    <option value="es">Español</option>
+    <option value="fr">Français</option>
+    <option value="de">Deutsch</option>
+    <option value="ar">العربية</option>
+    <option value="ur">اردو</option>
+  </select>
+</header>
+
     </header>
     <main>
         <section class="compressor-section">
@@ -245,6 +258,14 @@
                 <a id="downloadBtn" href="#" download="compressed-image.jpg">Download Compressed Image</a>
             </div>
         </section>
+        <h1 id="title">Online Image Compression Tool</h1>
+
+<p id="description">
+  Reduce your image size instantly while maintaining quality.
+</p>
+
+<button id="compressBtn">Compress Image</button>
+
        
     </main>
      <section class="home-blog">
@@ -368,6 +389,67 @@
     });
   });
 </script>
+    <script>
+const translations = {
+  en: {
+    title: "Online Image Compression Tool",
+    description: "Reduce your image size instantly while maintaining quality.",
+    compressBtn: "Compress Image"
+  },
+  es: {
+    title: "Herramienta de Compresión de Imágenes Online",
+    description: "Reduce el tamaño de tu imagen al instante manteniendo la calidad.",
+    compressBtn: "Comprimir Imagen"
+  },
+  fr: {
+    title: "Outil de Compression d'Images en Ligne",
+    description: "Réduisez la taille de votre image instantanément tout en conservant la qualité.",
+    compressBtn: "Compresser l'image"
+  },
+  de: {
+    title: "Online-Bildkomprimierungstool",
+    description: "Reduzieren Sie sofort die Größe Ihres Bildes bei gleichbleibender Qualität.",
+    compressBtn: "Bild komprimieren"
+  },
+  ar: {
+    title: "أداة ضغط الصور عبر الإنترنت",
+    description: "قلل حجم صورتك فوراً مع الحفاظ على الجودة.",
+    compressBtn: "ضغط الصورة"
+  },
+  ur: {
+    title: "آن لائن امیج کمپریسر ٹول",
+    description: "اپنی تصویر کا سائز فوراً کم کریں اور معیار برقرار رکھیں۔",
+    compressBtn: "تصویر کمپریس کریں"
+  }
+};
+</script>
+    <script>
+function setLanguage() {
+  const lang = document.getElementById("languageSelector").value;
+  const trans = translations[lang];
+
+  document.getElementById("title").textContent = trans.title;
+  document.getElementById("description").textContent = trans.description;
+  document.getElementById("compressBtn").textContent = trans.compressBtn;
+
+  // RTL support
+  document.documentElement.dir = (lang === "ar" || lang === "ur") ? "rtl" : "ltr";
+}
+
+// Save language
+document.getElementById("languageSelector").addEventListener("change", () => {
+  localStorage.setItem("preferredLang", languageSelector.value);
+});
+
+// Load saved language
+window.addEventListener("load", () => {
+  const savedLang = localStorage.getItem("preferredLang") || "en";
+  languageSelector.value = savedLang;
+  setLanguage();
+});
+</script>
+
+
 
 </body>
 </html> 
