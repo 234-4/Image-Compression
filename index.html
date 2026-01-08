@@ -74,23 +74,7 @@
   }
 }
 </script>
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SiteNavigationElement",
-  "name": ["Home","Image Compressor","Image Resizer","Blog","FAQ","Contact"],
-  "url": [
-    "https://www.imgcompressor.shop/",
-    "https://www.imgcompressor.shop/image-compressor.html",
-    "https://www.imgcompressor.shop/image-resizer.html",
-    "https://www.imgcompressor.shop/blog/",
-    "https://www.imgcompressor.shop/faq.html",
-    "https://www.imgcompressor.shop/contact.html"
-  ]
-}
-</script>
-
-    <style>
+   <style>
         .faq-section {
   max-width: 800px;
   margin: 60px auto;
@@ -201,134 +185,7 @@
   color: #fff;
   cursor: pointer;
 }
-:root {
-  --primary: #1a73e8;
-  --text: #333;
-  --bg: #ffffff;
-}
-
-body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
-}
-
-/* HEADER */
-.site-header {
-  position: sticky;
-  top: 0;
-  background: var(--bg);
-  border-bottom: 1px solid #eee;
-  z-index: 1000;
-}
-
-.header-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 18px;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--primary);
-  text-decoration: none;
-}
-
-/* DESKTOP NAV */
-.desktop-nav {
-  display: none;
-  gap: 18px;
-  align-items: center;
-}
-
-.desktop-nav a {
-  text-decoration: none;
-  color: var(--text);
-  font-weight: 500;
-}
-
-.dropdown {
-  position: relative;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background: #fff;
-  border: 1px solid #ddd;
-  min-width: 180px;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown-content a {
-  display: block;
-  padding: 10px;
-}
-
-/* MOBILE */
-.menu-toggle {
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.mobile-nav {
-  display: none;
-  background: #fff;
-}
-
-.mobile-nav.active {
-  display: block;
-}
-
-.mobile-nav ul {
-  list-style: none;
-  padding: 0;
-}
-
-.mobile-nav li {
-  border-bottom: 1px solid #eee;
-}
-
-.mobile-nav a,
-.submenu-toggle {
-  padding: 14px 18px;
-  display: block;
-  text-decoration: none;
-  color: var(--text);
-  background: none;
-  border: none;
-  width: 100%;
-  text-align: left;
-}
-
-.submenu {
-  display: none;
-  background: #f9f9f9;
-}
-
-.has-submenu.open .submenu {
-  display: block;
-}
-
-/* RESPONSIVE */
-@media (min-width: 768px) {
-  .menu-toggle,
-  .mobile-nav {
-    display: none;
-  }
-
-  .desktop-nav {
-    display: flex;
-  }
-}
-
-    </style>
+   </style>
 
 
 </head>
@@ -378,45 +235,7 @@ body {
       </select>
     </nav>
 
-    <!-- Mobile Hamburger -->
-    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
-      ☰
-    </button>
-  </div>
-
-  <!-- Mobile Nav -->
-  <nav class="mobile-nav">
-    <ul>
-      <li><a href="/" data-i18n="home">Home</a></li>
-
-      <li class="has-submenu">
-        <button class="submenu-toggle" data-i18n="tools">
-          Tools ▾
-        </button>
-        <ul class="submenu">
-          <li><a href="/image-compressor.html">Image Compressor</a></li>
-          <li><a href="/image-resizer.html">Image Resizer</a></li>
-          <li><a href="/image-converter.html">Image Converter</a></li>
-        </ul>
-      </li>
-
-      <li><a href="/blog/" data-i18n="blog">Blog</a></li>
-      <li><a href="/faq.html" data-i18n="faq">FAQ</a></li>
-      <li><a href="/contact.html" data-i18n="contact">Contact</a></li>
-
-      <li class="lang-mobile">
-        <select id="languageSwitcherMobile">
-          <option value="en">English</option>
-          <option value="hi">Hindi</option>
-          <option value="ur">Urdu</option>
-          <option value="fr">French</option>
-          <option value="pt">Portuguese</option>
-          <option value="es">Spanish</option>
-        </select>
-      </li>
-    </ul>
-  </nav>
-</header>
+  
 
     <main>
         <section class="compressor-section">
@@ -684,40 +503,6 @@ window.addEventListener("load", () => {
   setLanguage();
 });
 </script>
-
-<script>
-  // Mobile menu
-  const toggle = document.querySelector('.menu-toggle');
-  const mobileNav = document.querySelector('.mobile-nav');
-
-  toggle.onclick = () => {
-    mobileNav.classList.toggle('active');
-  };
-
-  document.querySelectorAll('.submenu-toggle').forEach(btn => {
-    btn.onclick = () => btn.parentElement.classList.toggle('open');
-  });
-
-  // Languages
-  const translations = {
-    en: { home: "Home", tools: "Tools", blog: "Blog", faq: "FAQ", contact: "Contact" },
-    hi: { home: "होम", tools: "टूल्स", blog: "ब्लॉग", faq: "सवाल", contact: "संपर्क" },
-    ur: { home: "ہوم", tools: "ٹولز", blog: "بلاگ", faq: "سوالات", contact: "رابطہ" },
-    fr: { home: "Accueil", tools: "Outils", blog: "Blog", faq: "FAQ", contact: "Contact" },
-    pt: { home: "Início", tools: "Ferramentas", blog: "Blog", faq: "FAQ", contact: "Contato" },
-    es: { home: "Inicio", tools: "Herramientas", blog: "Blog", faq: "FAQ", contact: "Contacto" }
-  };
-
-  function setLanguage(lang) {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      el.textContent = translations[lang][el.dataset.i18n];
-    });
-  }
-
-  document.getElementById('languageSwitcher').onchange = e => setLanguage(e.target.value);
-  document.getElementById('languageSwitcherMobile').onchange = e => setLanguage(e.target.value);
-</script>
-
 
 </body>
 </html> 
