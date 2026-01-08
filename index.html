@@ -185,16 +185,38 @@
   color: #fff;
   cursor: pointer;
 }
- /* HIDE DESKTOP DROPDOWN ON MOBILE INITIALLY */
+/* Hide mobile menu & toggle on desktop */
+.mobile-menu-toggle,
+.mobile-nav {
+  display: none;
+}
+
+/* Desktop nav default */
+.desktop-nav {
+  display: flex; /* visible on desktop */
+}
+
+/* Mobile styles */
 @media (max-width: 767px) {
-  /* Make the menu vertical and hidden */
   .desktop-nav {
-    display: none; /* hide default desktop style */
+    display: none; /* hide desktop nav on mobile */
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .mobile-nav {
+    display: none;
     flex-direction: column;
     width: 100%;
     background: #fff;
     position: fixed;
-    top: 60px; /* adjust to your header height */
+    top: 60px; /* adjust to header height */
     left: 0;
     border-top: 1px solid #eee;
     max-height: calc(100vh - 60px);
@@ -202,110 +224,36 @@
     z-index: 999;
   }
 
-  /* Show hamburger */
-  .menu-toggle {
-    display: block;
-  }
-
-  .desktop-nav ul {
-    flex-direction: column;
-    padding: 0;
+  .mobile-nav ul {
+    list-style: none;
     margin: 0;
+    padding: 0;
   }
 
-  .desktop-nav li {
+  .mobile-nav li {
     border-bottom: 1px solid #f1f1f1;
   }
 
-  .desktop-nav li a,
-  .desktop-nav li button {
-    padding: 14px 18px;
+  .mobile-nav a,
+  .submenu-toggle {
+    display: block;
     width: 100%;
+    padding: 14px 18px;
     text-align: left;
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
   }
 
-  /* Submenu hidden by default */
-  .desktop-nav .submenu {
+  .mobile-nav .submenu {
     display: none;
     flex-direction: column;
     background: #f9f9f9;
   }
 
-  /* Open submenu when parent has .open */
-  .desktop-nav li.open > .submenu {
-    display: flex;
-  }
-}
-
-/* DESKTOP: Keep original display */
-@media (min-width: 768px) {
-  .menu-toggle {
-    display: none;
-  }
-
-  .desktop-nav {
-    display: flex;
-  }
-}
-/* HIDE DESKTOP DROPDOWN ON MOBILE INITIALLY */
-@media (max-width: 767px) {
-  /* Make the menu vertical and hidden */
-  .desktop-nav {
-    display: none; /* hide default desktop style */
-    flex-direction: column;
-    width: 100%;
-    background: #fff;
-    position: fixed;
-    top: 60px; /* adjust to your header height */
-    left: 0;
-    border-top: 1px solid #eee;
-    max-height: calc(100vh - 60px);
-    overflow-y: auto;
-    z-index: 999;
-  }
-
-  /* Show hamburger */
-  .menu-toggle {
-    display: block;
-  }
-
-  .desktop-nav ul {
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-  }
-
-  .desktop-nav li {
-    border-bottom: 1px solid #f1f1f1;
-  }
-
-  .desktop-nav li a,
-  .desktop-nav li button {
-    padding: 14px 18px;
-    width: 100%;
-    text-align: left;
-  }
-
-  /* Submenu hidden by default */
-  .desktop-nav .submenu {
-    display: none;
-    flex-direction: column;
-    background: #f9f9f9;
-  }
-
-  /* Open submenu when parent has .open */
-  .desktop-nav li.open > .submenu {
-    display: flex;
-  }
-}
-
-/* DESKTOP: Keep original display */
-@media (min-width: 768px) {
-  .menu-toggle {
-    display: none;
-  }
-
-  .desktop-nav {
+  .mobile-nav li.open > .submenu {
     display: flex;
   }
 }
@@ -330,6 +278,53 @@
         </nav>
 
     </header>
+    <header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo">ImgCompressor</a>
+
+    <!-- Hamburger for Mobile -->
+    <button class="mobile-menu-toggle" aria-label="Open Menu" aria-expanded="false">
+      ☰
+    </button>
+
+    <!-- Desktop Menu (existing, unchanged) -->
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li class="has-submenu">
+          <button>Tools ▾</button>
+          <ul class="submenu">
+            <li><a href="/image-compressor.html">Image Compressor</a></li>
+            <li><a href="/image-resizer.html">Image Resizer</a></li>
+            <li><a href="/image-converter.html">Image Converter</a></li>
+          </ul>
+        </li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Mobile Menu -->
+  <nav class="mobile-nav">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li class="has-submenu">
+        <button class="submenu-toggle">Tools ▾</button>
+        <ul class="submenu">
+          <li><a href="/image-compressor.html">Image Compressor</a></li>
+          <li><a href="/image-resizer.html">Image Resizer</a></li>
+          <li><a href="/image-converter.html">Image Converter</a></li>
+        </ul>
+      </li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/faq.html">FAQ</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
      <main>
         <section class="compressor-section">
             <h1 id="title">Online Image Compression Tool</h1>
@@ -597,22 +592,21 @@ window.addEventListener("load", () => {
 });
 </script>
 <script>
-  const menuToggle = document.querySelector('.menu-toggle');
-  const desktopNav = document.querySelector('.desktop-nav');
+  const mobileToggle = document.querySelector('.mobile-menu-toggle');
+  const mobileNav = document.querySelector('.mobile-nav');
 
-  // Toggle full menu on mobile
-  menuToggle.addEventListener('click', () => {
-    desktopNav.style.display = desktopNav.style.display === 'flex' ? 'none' : 'flex';
+  // Toggle mobile menu
+  mobileToggle.addEventListener('click', () => {
+    mobileNav.style.display = mobileNav.style.display === 'flex' ? 'none' : 'flex';
   });
 
-  // Toggle submenus
-  desktopNav.querySelectorAll('.has-submenu > button').forEach(btn => {
+  // Toggle mobile submenu
+  mobileNav.querySelectorAll('.submenu-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       btn.parentElement.classList.toggle('open');
     });
   });
 </script>
-
 
 </body>
 </html> 
