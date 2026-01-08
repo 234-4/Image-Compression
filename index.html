@@ -185,48 +185,49 @@
   color: #fff;
   cursor: pointer;
 }
-/* Desktop menu visible by default */
+/* DESKTOP STYLES */
 .desktop-nav {
-  display: flex;
+  display: flex; /* normal horizontal menu on desktop */
 }
 
-/* Hide toggle button on desktop */
 .menu-toggle {
-  display: none;
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
+  display: none; /* hidden on desktop */
 }
 
-/* MOBILE */
+/* MOBILE STYLES */
 @media (max-width: 767px) {
-  /* Hide desktop menu initially */
+
+  /* Hide desktop menu by default on mobile */
   .desktop-nav {
-    display: none;
+    display: none !important; /* critical to hide desktop nav on mobile */
     flex-direction: column;
     width: 100%;
-    background: #fff;
+    background: #222; /* header background */
     position: absolute;
-    top: 60px; /* adjust for header height */
+    top: 60px; /* adjust to your header height */
     left: 0;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #444;
     z-index: 999;
   }
 
-  /* Show toggle button */
+  /* Show hamburger button */
   .menu-toggle {
     display: block;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
   }
 
   /* Submenus hidden by default */
   .desktop-nav .submenu {
     display: none;
     flex-direction: column;
-    background: #f9f9f9;
+    background: #333;
   }
 
-  /* Submenu open state */
+  /* Open submenu */
   .desktop-nav li.open > .submenu {
     display: flex;
   }
@@ -234,18 +235,19 @@
   /* Menu links styling for mobile */
   .desktop-nav li a,
   .desktop-nav li button {
-    padding: 14px 18px;
+    display: block;
+    padding: 12px 16px;
+    color: #fff;
+    text-decoration: none;
     width: 100%;
     text-align: left;
+    border-bottom: 1px solid #444;
     background: none;
-    border: none;
-    font-size: 16px;
-    color: #333;
     cursor: pointer;
   }
 
   .desktop-nav li {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #444;
   }
 }
 
@@ -269,14 +271,17 @@
         </nav>
 
     </header>
-  <header class="site-header">
+<header class="site-header">
   <div class="header-inner">
-    <a href="/" class="logo">ImgCompressor</a>
+    <!-- Logo -->
+    <a href="/" class="logo">
+      <img src="logo.png" alt="Image Compressor">
+    </a>
 
-    <!-- Mobile toggle button -->
+    <!-- Mobile Hamburger Toggle -->
     <button class="menu-toggle" aria-label="Open Menu">☰</button>
 
-    <!-- Existing desktop menu -->
+    <!-- Desktop Menu (existing menu, unchanged) -->
     <nav class="desktop-nav">
       <ul>
         <li><a href="/">Home</a></li>
@@ -295,6 +300,7 @@
     </nav>
   </div>
 </header>
+
 
 
      <main>
@@ -564,25 +570,25 @@ window.addEventListener("load", () => {
 });
 </script>
 <script>
-  const menuToggle = document.querySelector('.menu-toggle');
-  const desktopNav = document.querySelector('.desktop-nav');
+const menuToggle = document.querySelector('.menu-toggle');
+const desktopNav = document.querySelector('.desktop-nav');
 
-  // Toggle main menu on mobile
-  menuToggle.addEventListener('click', () => {
-    if (desktopNav.style.display === 'flex') {
-      desktopNav.style.display = 'none';
-    } else {
-      desktopNav.style.display = 'flex';
-      desktopNav.style.flexDirection = 'column';
-    }
-  });
+// Toggle mobile menu
+menuToggle.addEventListener('click', () => {
+  if (desktopNav.style.display === 'flex') {
+    desktopNav.style.display = 'none';
+  } else {
+    desktopNav.style.display = 'flex';
+    desktopNav.style.flexDirection = 'column';
+  }
+});
 
-  // Toggle submenus on mobile
-  desktopNav.querySelectorAll('.has-submenu > button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      btn.parentElement.classList.toggle('open');
-    });
+// Toggle submenus
+desktopNav.querySelectorAll('.has-submenu > button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.parentElement.classList.toggle('open');
   });
+});
 </script>
 
 
