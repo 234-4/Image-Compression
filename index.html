@@ -185,18 +185,6 @@
                 <li><a href="privacy.html">Privacy Policy</a></li>
             </ul>
         </nav>
-        <header>
-  <!-- your existing logo/menu -->
-
-  <select id="languageSelector" onchange="setLanguage()">
-    <option value="en">English</option>
-    <option value="es">Español</option>
-    <option value="fr">Français</option>
-    <option value="de">Deutsch</option>
-    <option value="ar">العربية</option>
-    <option value="ur">اردو</option>
-  </select>
-</header>
 
     </header>
     <main>
@@ -372,6 +360,22 @@
     </section>
     
     <footer>
+        <footer>
+  <!-- existing footer content -->
+
+  <div class="footer-language">
+    <label for="languageSelector">Language:</label>
+    <select id="languageSelector" onchange="setLanguage()">
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+      <option value="ar">العربية</option>
+      <option value="ur">اردو</option>
+    </select>
+  </div>
+</footer>
+
         <p>&copy; 2026 ImageCompressor. All rights reserved.</p>
     </footer>
     <script src="script.js"></script>
