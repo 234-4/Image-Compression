@@ -718,10 +718,7 @@ qInput.addEventListener('input', () => {
 qRange.addEventListener('input', () => {
   qInput.value = qRange.value;
 });
-</script>
-fileName.textContent = file.name;
-beforeSize.textContent = formatSize(originalSize);
-afterSize.textContent = formatSize(compressedSize);
+    </script>
 canvas.toBlob(blob => {
   compressedImg.src = URL.createObjectURL(blob);
 }, 'image/jpeg', quality / 100);
