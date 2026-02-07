@@ -415,6 +415,47 @@ nav ul {
     box-shadow: none; /* cleaner look on small screens */
   }
 }
+<style>
+.tool-video {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 12px;
+}
+
+.tool-video h2 {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.tool-video video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9; /* CLS FIX */
+  border-radius: 12px;
+  background: #000;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .tool-video h2 {
+    font-size: 1.05rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .tool-video {
+    padding: 0 8px;
+  }
+
+  .tool-video h2 {
+    font-size: 1rem;
+  }
+}
+</style>
 
      
    </style>
@@ -522,7 +563,21 @@ nav ul {
     This gives you full control to choose the perfect balance between image quality and file size.
   </p>
 </section>
+        <section class="tool-video">
+  <h2>How to Use the Image Compressor</h2>
 
+  <video
+    class="lazy-video"
+    controls
+    playsinline
+    preload="none"
+    width="100%"
+    poster="video-thumbnail.jpg"
+  >
+    <source data-src="how-to-use-imgcompressor.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</section>
 
          <!-- Image Slider Section -->
 <section class="slider-section">
@@ -1037,6 +1092,29 @@ function slideRightToLeft() {
 // Auto-slide every 3 seconds
 setInterval(slideRightToLeft, 3000);
 </script>
+        <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const videos = document.querySelectorAll(".lazy-video");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const video = entry.target;
+        const source = video.querySelector("source");
+
+        if (source.dataset.src) {
+          source.src = source.dataset.src;
+          video.load();
+          observer.unobserve(video);
+        }
+      }
+    });
+  });
+
+  videos.forEach(video => observer.observe(video));
+});
+</script>
+
 
 </body>
 </html> 
