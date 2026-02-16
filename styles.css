@@ -137,7 +137,7 @@ button[type="submit"] {
     transition: background 0.2s;
 }
 button[type="submit"]:hover {
-    background: #019875;
+    background: 02785B;
 }
 #outputContainer {
     margin-top: 2rem;
