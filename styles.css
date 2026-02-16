@@ -127,7 +127,7 @@ label[for="compressionRange"] {
     width: 100%;
 }
 button[type="submit"] {
-    background: 07614F;
+    background: #07614F;
     color: #fff;
     border: none;
     padding: 0.75rem;
@@ -137,7 +137,7 @@ button[type="submit"] {
     transition: background 0.2s;
 }
 button[type="submit"]:hover {
-    background: 045440;
+    background: #045440;
 }
 #outputContainer {
     margin-top: 2rem;
