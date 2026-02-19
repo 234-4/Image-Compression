@@ -5,5 +5,11 @@
       "destination": "/",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/blog/how-image-compression-improves-seo", "destination": "/blog/how-image-compression-improves-seo.html" }
   ]
 }
