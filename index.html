@@ -103,21 +103,9 @@
   }
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "VideoObject",
-  "name": "How to Use Image Compressor",
-  "description": "Learn how to compress images using our free online image compressor tool.",
-  "thumbnailUrl": "https://www.imgcompressor.shop/video-thumbnail.jpg",
-  "uploadDate": "2026-02-20T00:00:00+00:00",
-  "duration": "PT2M30S",
-  "contentUrl": "https://www.imgcompressor.shop/videos/how-to-use-image-compressor.mp4",
-  "embedUrl": "https://www.imgcompressor.shop/how-to-use-image-compressor"
-}
-</script>
- 
-   <style>
+
+    
+  <style>
       /* Critical styles for above-the-fold content */
   h1#title {
     font-size: 2em;
@@ -597,20 +585,8 @@ nav ul {
     This gives you full control to choose the perfect balance between image quality and file size.
   </p>
 </section>
-        <section class="tool-video">
-  <h2>How to Use the Image Compressor</h2>
 
-  <video
-  controls
-  playsinline
-  preload="metadata"
-  width="100%"
-  poster="video-thumbnail.jpg"
->
-  <source data-src="how-to-use-imgcompressor.mp4" type="video/mp4">
-</video>
-</section>
-
+        
          <!-- Image Slider Section -->
 <section class="slider-section">
   <div class="slider-container">
@@ -1124,28 +1100,7 @@ function slideRightToLeft() {
 // Auto-slide every 3 seconds
 setInterval(slideRightToLeft, 3000);
 </script>
-        <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const videos = document.querySelectorAll(".lazy-video");
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const video = entry.target;
-        const source = video.querySelector("source");
-
-        if (source.dataset.src) {
-          source.src = source.dataset.src;
-          video.load();
-          observer.unobserve(video);
-        }
-      }
-    });
-  });
-
-  videos.forEach(video => observer.observe(video));
-});
-</script>
  <script src="script.js"></script>
 </body>
 </html> 
