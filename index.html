@@ -7,6 +7,8 @@
     <meta name="description" content="Free online image compressor to reduce JPG, PNG & WebP image size without quality loss. Fast, secure, and SEO-friendly image optimization tool.">
     <meta name="keywords" content="image compressor online, online image optimizer, reduce image size, compress jpeg, compress png, optimize images for web, free image compressor,resize image online in kb">
     <meta name="author" content="Image Compression Tool">
+    <link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#4CAF50">
    
     <title> Free Image Compressor tool online, compressed images</title>
       <link rel="stylesheet" href="styles.css">
@@ -1106,5 +1108,11 @@ setInterval(slideRightToLeft, 3000);
 </script>
 
  <script src="script.js"></script>
+        <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+    .then(() => console.log("Service Worker Registered"));
+}
+</script>
 </body>
 </html> 
