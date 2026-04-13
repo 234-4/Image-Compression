@@ -41,128 +41,108 @@
 </script>
 
     <style>
-/* Contact Page Wrapper */
-.contact-container {
-  max-width: 600px;
-  margin: 60px auto;
-  padding: 30px;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+/* Container */
+.contact {
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  display: flex;
+  justify-content: center;
 }
 
-/* Heading */
-.contact-container h2 {
+.contact-wrapper {
+  max-width: 700px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+/* Header */
+.contact-header {
   text-align: center;
-  margin-bottom: 20px;
-  color: #000;
+  margin-bottom: 25px;
+}
+
+.contact-header h2 {
+  color: #fff;
   font-size: 28px;
 }
 
-/* Description text */
-.contact-container p {
-  text-align: center;
-  color: #555;
-  margin-bottom: 30px;
-  font-size: 15px;
-}
-
-/* Form group */
-.contact-form .form-group {
-  margin-bottom: 18px;
-}
-
-/* Labels */
-.contact-form label {
-  display: block;
-  margin-bottom: 6px;
-  color: #000;
-  font-weight: 600;
+.contact-header p {
+  color: #cbd5e1;
   font-size: 14px;
 }
 
-/* Inputs & Textarea */
-.contact-form input,
-.contact-form textarea {
+/* Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Row */
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full {
   width: 100%;
-  padding: 12px 14px;
+}
+
+/* Inputs */
+label {
+  color: #e2e8f0;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+input,
+textarea {
+  padding: 10px 12px;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  color: #000;
-  background: #fff;
-}
-
-/* Placeholder */
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-  color: #888;
-}
-
-/* Focus state */
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: #000;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-}
-
-/* Textarea height */
-.contact-form textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-/* Submit button */
-.contact-form button {
-  width: 100%;
-  padding: 14px;
-  background: #000;
-  color: #fff;
   border: none;
-  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  background: #f1f5f9;
+}
+
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 2px #38bdf8;
+}
+
+/* Button */
+.btn-submit {
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  color: white;
   font-size: 16px;
   cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s, transform 0.2s;
+  transition: 0.3s ease;
 }
 
-/* Button hover */
-.contact-form button:hover {
-  background: #222;
+.btn-submit:hover {
   transform: translateY(-2px);
-}
-
-/* Status message */
-.form-status {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 14px;
-}
-
-/* Success */
-.form-status.success {
-  color: green;
-}
-
-/* Error */
-.form-status.error {
-  color: red;
+  box-shadow: 0 6px 20px rgba(99,102,241,0.4);
 }
 
 /* Responsive */
 @media (max-width: 600px) {
-  .contact-container {
-    margin: 30px 15px;
-    padding: 20px;
+  .form-row {
+    flex-direction: column;
   }
-
-  .contact-container h2 {
-    font-size: 24px;
-  }
-}
-    
     </style>
 </head>
 <body>
@@ -247,27 +227,44 @@ and look forward to assisting you.
 </p>
 
 
-            <div class="contact-container">
-  <h2>Contact Us</h2>
-  <p>Have a question? Send us a message.</p>
+   <section class="contact">
+  <div class="contact-wrapper">
 
-  <form action="https://api.web3forms.com/submit" method="POST">
-    <form action="https://api.web3forms.com/submit" method="POST">
-  <label for="name">Name</label>
-  <input type="text" id="name" name="name" placeholder="Enter your name" required>
+    <div class="contact-header">
+      <h2>Contact Us</h2>
+      <p>Have a question? Send us a message.</p>
+    </div>
 
-  <label for="email">Email</label>
-  <input type="email" id="email" name="email" placeholder="Enter your email" required>
+    <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+      
+      <!-- Hidden -->
+      <input type="hidden" name="access_key" value="adcc061f-ed42-41d2-bf33-d612d80ac010">
+      <input type="hidden" name="subject" value="New Contact Message">
+      <input type="checkbox" name="botcheck" class="hidden">
 
-  <label for="message">Message</label>
-  <textarea id="message" name="message" placeholder="Write your message" rows="5" required></textarea>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="John Doe" required>
+        </div>
 
-  <button type="submit">Submit</button>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="john@example.com" required>
+        </div>
+      </div>
 
-</form>
-            </div>
-</section>
-        
+      <div class="form-group full">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">Send Message</button>
+
+    </form>
+
+  </div>
+</section>        
     </main>
    <footer style="background:#000;padding:20px;text-align:center;font-size:14px;">
   <p style="color:#e0e0e0;">
