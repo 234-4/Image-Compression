@@ -554,33 +554,50 @@ nav ul {
                 <button type="submit">Compress & Download</button>
               </form>
                 <div id="outputContainer">
-                <h2>Compressed Image</h2>
-                <img id="compressedImage" src="#" alt="Compressed Image"/>
-                <div id="compressedSpecs" class="image-specs">
-                    <h3>Compressed Image Specifications</h3>
-                    <div class="specs-grid">
-                        <div class="spec-item">
-                            <span class="spec-label">Dimensions:</span>
-                            <span class="spec-value" id="compressedDimensions">-</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">File Size:</span>
-                            <span class="spec-value" id="compressedSize">-</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Format:</span>
-                            <span class="spec-value" id="compressedFormat">JPEG</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Compression Ratio:</span>
-                            <span class="spec-value" id="compressionRatio">-</span>
-                        </div>
-                    </div>
-                    <div class="compression-ratio" id="compressionRatioDisplay"></div>
-                </div>
-                <a id="downloadBtn" href="#" download="compressed-image.jpg">Download Compressed Image</a>
+    <h2>Compression Result</h2>
+
+    <div class="comparison-container">
+
+        <!-- ORIGINAL IMAGE -->
+        <div class="comparison-box">
+            <h3>Original</h3>
+
+            <img id="resultOriginalImage"
+                 src="#"
+                 alt="Original Image">
+
+            <p>
+                File Size:
+                <strong id="resultOriginalSize">-</strong>
+            </p>
+        </div>
+
+        <!-- COMPRESSED IMAGE -->
+        <div class="comparison-box">
+            <h3>After Compression</h3>
+
+            <img id="compressedImage"
+                 src="#"
+                 alt="Compressed Image">
+
+            <p>
+                File Size:
+                <strong id="compressedSize">-</strong>
+            </p>
+
+            <div class="compression-ratio"
+                 id="compressionRatioDisplay">
             </div>
-        </section>
+        </div>
+
+    </div>
+
+    <a id="downloadBtn"
+       href="#"
+       download="compressed-image.jpg">
+        Download Compressed Image
+    </a>
+</div>        </section>
         <section class="how-to-use">
   <h2>How to Use the Image Compressor</h2>
   <ol>
