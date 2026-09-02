@@ -619,10 +619,9 @@ nav ul {
          <!-- Image Slider Section -->
 <section class="slider-section">
   <div class="slider-container">
-    <div class="slider-track" id="sliderTrack">
+    <div class="slider-track">
       <img src="slide1-optimized.webp" width="380" height="214" alt="Slide1">
-      <img src="slide2.webp" width="380" height="214"alt="Slide2">
-      <img src="slide3.webp" width="380" height="214" alt="Slide3">
+      
     </div>
   </div>
 </section>
@@ -1111,26 +1110,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 </script>
-        <script>
-const sliderTrack = document.getElementById("sliderTrack");
-const slides = sliderTrack.children;
-let index = 0;
-
-function slideRightToLeft() {
-  index++;
-
-  if (index >= slides.length) {
-    index = 0;
-  }
-
-  sliderTrack.style.transform = `translateX(-${index * 100}%)`;
-}
-
-// Auto-slide every 3 seconds
-setInterval(slideRightToLeft, 3000);
-</script>
-
- <script src="script.js"></script>
+       
+         <script src="script.js"></script>
         <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js')
