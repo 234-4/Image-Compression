@@ -1,0 +1,6 @@
+# imgcompressor
+
+> Free image compressor online
+
+Free Image Compressor Tool Online, compressed JPG, PNG ...
+
