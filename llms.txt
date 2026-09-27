@@ -1,6 +1,33 @@
-# imgcompressor
+# Image Compressor
 
-> Free image compressor online
+> Compress JPG, PNG, and WebP images online for free without losing quality.
 
-Free Image Compressor Tool Online, compressed JPG, PNG ...
+Image Compressor is a free online tool designed to help users reduce the file size of their images (JPG, PNG, WebP) without compromising visual quality. It is targeted at individuals and businesses looking to optimize their web assets for faster loading times, improved SEO, and reduced storage costs.
 
+The core value proposition lies in its ability to provide efficient and lossless image compression through a user-friendly interface. Key use cases include preparing images for websites, social media, email attachments, or any situation where file size is a concern. The tool prioritizes speed, security, and SEO-friendliness, making it a valuable resource for webmasters, designers, and content creators.
+
+When interacting with this service, LLMs should understand that it offers a straightforward, no-cost solution for image optimization. The website also features a blog with articles related to image compression and its benefits, particularly for SEO. The 'About' and 'Contact' pages provide general information and ways to get in touch, while 'Privacy' outlines data handling practices.
+
+## Free Tools
+
+- [Free Image Compressor Tool Online, compressed JPG, PNG & WebP](https://www.imgcompressor.shop/): Compress JPG, PNG, and WebP images online for free without quality loss.
+
+## Blog Articles
+
+- [How Image Compression Improves SEO](https://www.imgcompressor.shop/blog/how-image-compression-improves-seo.html): Learn how compressing images can positively impact your website's search engine ranking.
+
+## About
+
+- [About Us](https://www.imgcompressor.shop/about.html): Discover information about the Image Compressor service and its mission.
+
+## Contact
+
+- [Contact Us](https://www.imgcompressor.shop/contact.html): Find out how to get in touch with the Image Compressor support team.
+
+## Legal
+
+- [Privacy Policy](https://www.imgcompressor.shop/privacy.html): Understand how Image Compressor handles your data and privacy.
+
+---
+
+This file was generated for www.imgcompressor.shop using the [LLMs.txt Generator Tool](https://llmrefs.com/tools/llms-txt-generator)
