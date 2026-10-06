@@ -1,26 +1,36 @@
 // ImgCompressor.shop – compress to a target file size, entirely in the browser
 (() => {
   const $ = (id) => document.getElementById(id);
-  const input = $('imageInput'), kbInput = $('targetKb'), form = $('compressForm'),
-        btn = $('compressBtn'), statusEl = $('status'), out = $('result'),
-        resImg = $('resultImg'), info = $('resultInfo'), dl = $('downloadBtn');
   const ALLOWED = ['image/jpeg', 'image/png', 'image/webp'];
   const webpOk = document.createElement('canvas').toDataURL('image/webp').startsWith('data:image/webp');
+  const input = $('imageInput'), kbInput = $('targetKb'), kbLabel = $('targetValue'), form = $('compressForm'),
+        btn = $('compressBtn'), statusEl = $('status'), outBox = $('outputContainer'), prev = $('imagePreview'),
+        specs = $('originalSpecs'), ratio = $('compressionRatioDisplay'), dl = $('downloadBtn');
   let file = null, img = null, srcUrl = null, resUrl = null;
 
   const say = (m) => { statusEl.textContent = m || ''; };
-  const fmt = (b) => b < 1024 ? b + ' B' : b < 1048576 ? (b / 1024).toFixed(1) + ' KB' : (b / 1048576).toFixed(2) + ' MB';
+  const fmt = (b) => b < 1024 ? b + ' Bytes' : b < 1048576 ? (b / 1024).toFixed(1) + ' KB' : (b / 1048576).toFixed(2) + ' MB';
+
+  kbInput.addEventListener('input', () => { kbLabel.textContent = kbInput.value || '–'; });
 
   input.addEventListener('change', (e) => {
     const f = e.target.files[0];
-    out.style.display = 'none'; img = null; say('');
+    outBox.style.display = 'none'; specs.style.display = 'none'; prev.style.display = 'none';
+    img = null; say('');
     if (!f) return;
     if (!ALLOWED.includes(f.type)) { say('Please choose a JPG, PNG or WebP image.'); return; }
     file = f;
     if (srcUrl) URL.revokeObjectURL(srcUrl);
     srcUrl = URL.createObjectURL(f);
     const i = new Image();
-    i.onload = () => { img = i; say(`Loaded ${f.name} (${i.naturalWidth}×${i.naturalHeight}px, ${fmt(f.size)})`); };
+    i.onload = () => {
+      img = i;
+      prev.src = srcUrl; prev.style.display = 'block';
+      $('originalDimensions').textContent = `${i.naturalWidth} × ${i.naturalHeight} px`;
+      $('originalSize').textContent = fmt(f.size);
+      $('originalFormat').textContent = f.type.split('/')[1].toUpperCase();
+      specs.style.display = 'block';
+    };
     i.onerror = () => say('This image could not be read. It may be corrupted.');
     i.src = srcUrl;
   });
@@ -35,15 +45,19 @@
     return new Promise((res) => c.toBlob(res, type, q)).then((b) => ({ blob: b, w: c.width, h: c.height }));
   }
 
-  function show(blob, note, w, h) {
+  function show(blob, note) {
     if (resUrl) URL.revokeObjectURL(resUrl);
     resUrl = URL.createObjectURL(blob);
-    resImg.src = resUrl;
+    $('resultOriginalImage').src = srcUrl;
+    $('resultOriginalSize').textContent = fmt(file.size);
+    $('compressedImage').src = resUrl;
+    $('compressedSize').textContent = fmt(blob.size);
     const ext = blob.type.split('/')[1].replace('jpeg', 'jpg');
     dl.href = resUrl;
-    dl.download = file.name.replace(/\.[^.]+$/, '') + '-' + Math.round(blob.size / 1024) + 'kb.' + ext;
-    info.textContent = `${fmt(file.size)} → ${fmt(blob.size)}${w ? ` (${w}×${h}px)` : ''}. ${note}`;
-    out.style.display = 'block';
+    dl.download = file.name.replace(/\.[^.]+$/, '') + '-' + Math.max(1, Math.round(blob.size / 1024)) + 'kb.' + ext;
+    ratio.textContent = note;
+    ratio.style.display = 'block';
+    outBox.style.display = 'block';
   }
 
   form.addEventListener('submit', async (e) => {
@@ -60,7 +74,7 @@
       const flat = jpeg && file.type !== 'image/jpeg'; // JPEG has no transparency
       let scale = 1, best = null;
       for (let n = 0; n < 10 && !best; n++) {
-        let r = await encode(scale, 0.4, type, flat);
+        const r = await encode(scale, 0.4, type, flat);
         if (!r.blob) break;
         if (r.blob.size > target) { scale *= 0.85; continue; }
         best = r;
@@ -74,10 +88,10 @@
       if (!best) { say(`Could not reach ${kb} KB. Try a higher target.`); }
       else {
         say('');
-        const notes = [];
-        if (best.w < img.naturalWidth) notes.push('Dimensions were reduced to reach the target.');
-        if (flat) notes.push('Transparency was replaced with white.');
-        show(best.blob, notes.join(' ') || `Under your ${kb} KB target.`, best.w, best.h);
+        let note = `Compressed to ${fmt(best.blob.size)} (${best.w} × ${best.h} px), under your ${kb} KB target.`;
+        if (best.w < img.naturalWidth) note += ' Dimensions were reduced to reach the target.';
+        if (flat) note += ' Transparency was replaced with white.';
+        show(best.blob, note);
       }
     } catch (err) { say('Compression failed. Try a smaller image.'); }
     btn.disabled = false;
@@ -85,10 +99,16 @@
 
   const toggle = document.querySelector('.nav-toggle'), menu = document.querySelector('nav ul');
   if (toggle && menu) {
-    toggle.addEventListener('click', () => {
-      const open = menu.classList.toggle('active');
-      toggle.textContent = open ? '✕' : '☰';
-      toggle.setAttribute('aria-expanded', String(open));
-    });
+    const setOpen = (o) => { menu.classList.toggle('active', o); toggle.textContent = o ? '✕' : '☰'; toggle.setAttribute('aria-expanded', String(o)); };
+    toggle.addEventListener('click', () => setOpen(!menu.classList.contains('active')));
+    document.addEventListener('click', (e) => { if (!menu.contains(e.target) && !toggle.contains(e.target)) setOpen(false); });
   }
+
+  document.querySelectorAll('.faq-question').forEach((b) => {
+    b.addEventListener('click', () => {
+      const item = b.parentElement, open = !item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach((i) => i.classList.remove('active'));
+      item.classList.toggle('active', open);
+    });
+  });
 })();
