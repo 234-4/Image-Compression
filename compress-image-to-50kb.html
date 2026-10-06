@@ -71,41 +71,107 @@
 </script>
 <style>
 .nav-toggle{display:none}
-@media (max-width:768px){.nav-toggle{display:block;background:none;border:none;font-size:24px;color:#fff;cursor:pointer;padding:10px;position:absolute;right:20px;top:15px}nav{position:relative}nav ul{display:none;flex-direction:column;width:100%;background:rgba(0,0,0,.9);position:absolute;top:70px;left:0;padding:20px 0;margin:0}nav ul.active{display:flex}nav ul li{text-align:center;padding:10px}}
-.page{max-width:800px;margin:30px auto;padding:0 16px;line-height:1.7;font-family:Arial,sans-serif;color:#222}
-.page details{border-bottom:1px solid #ddd;padding:10px 0}.page summary{cursor:pointer;font-weight:600}
-#status{min-height:1.2em;color:#b00020}#result{display:none}#resultImg{max-width:100%;height:auto}
+nav ul{transition:all .3s ease-in-out}
+@media (max-width:768px){
+  .nav-toggle{display:block;background:none;border:none;font-size:24px;color:#fff;cursor:pointer;padding:10px;position:absolute;right:20px;top:15px;z-index:1000}
+  nav{position:relative;display:flex;flex-direction:column;align-items:flex-start;padding:15px}
+  nav ul{display:none;flex-direction:column;width:100%;background:rgba(0,0,0,.9);position:absolute;top:70px;left:0;z-index:999;padding:20px 0;margin:0;box-shadow:0 5px 15px rgba(0,0,0,.3)}
+  nav ul.active{display:flex}
+  nav ul li{width:100%;text-align:center;margin:0;padding:0}
+  nav ul li a{display:block;padding:15px 20px;color:#fff;text-decoration:none;font-size:16px;border-bottom:1px solid rgba(255,255,255,.1)}
+  nav ul li:last-child a{border-bottom:none}
+  .logo{z-index:1001;position:relative}
+}
+#status{min-height:1.2em;color:#b00020}
+.home-blog{max-width:900px;margin:60px auto;padding:25px;background:#fff;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,.05)}
+.home-blog h2{color:#000;margin-bottom:15px}
+.home-blog p{color:#333;line-height:1.7;margin-bottom:12px}
+.home-blog .read-more{display:inline-block;margin-top:10px;color:#0033ff;font-weight:600;text-decoration:none}
+.seo-article{max-width:900px;margin:40px auto;padding:20px;line-height:1.7;font-family:Arial,Helvetica,sans-serif;color:#222}
+.seo-article h2{font-size:22px;margin:30px 0 10px;color:#111}
+.seo-article h3{font-size:18px;margin:22px 0 8px;color:#111}
+.seo-article p{font-size:16px;margin-bottom:15px}
+.seo-article ul,.seo-article ol{margin:0 0 15px 20px}
+.seo-article li{margin-bottom:8px}
+.faq-section{max-width:800px;margin:60px auto;padding:20px;font-family:Arial,sans-serif}
+.faq-title{text-align:center;font-size:28px;margin-bottom:30px;color:#000}
+.faq-item{border-bottom:1px solid #ddd;margin-bottom:10px}
+.faq-question{width:100%;background:#f9f9f9;color:#000;padding:16px;font-size:16px;font-weight:600;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-question:hover{background:#eee}
+.faq-icon{font-size:20px;transition:transform .3s ease}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease;background:#fff}
+.faq-answer p{padding:15px;margin:0;color:#333;line-height:1.6}
+.faq-item.active .faq-answer{max-height:200px}
+.faq-item.active .faq-icon{transform:rotate(45deg)}
+.footer-language{margin-top:15px;text-align:center}
+.footer-language label{margin-right:8px;font-size:14px;color:#ccc}
+.footer-language select{padding:6px 10px;border-radius:6px;border:1px solid #555;background:#111;color:#fff;cursor:pointer}
 </style>
 </head>
 <body>
-<header><nav>
+<header>
+<nav>
 <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-<a href="/" class="logo"><img src="/logo.webp" alt="IMGCompressor.shop – Free Online Image Compressor" width="137" height="60"></a>
-<ul><li><a href="/">Home</a></li><li><a href="/about.html">About Us</a></li><li><a href="/blog/how-image-compression-improves-seo.html">Blog</a></li><li><a href="/contact.html">Contact Us</a></li><li><a href="/privacy.html">Privacy Policy</a></li></ul>
-</nav></header>
-<main class="page">
-<h1>Compress Image to 50KB Online – Free</h1>
-<p>Many application forms, ID-photo uploaders and signup pages set a 50 KB upload limit. Choose your photo and this tool shrinks it to 50 KB or less, lowering quality first and reducing dimensions only when it has to. Everything runs in your browser, so your image is never uploaded.</p>
+<a href="/" class="logo"><img src="/logo.webp" alt="IMGCompressor.shop – Free Online Image Compressor" width="137" height="60" class="nav-logo-img"></a>
+<ul>
+<li><a href="/about.html">About Us</a></li>
+<li><a href="/blog/how-image-compression-improves-seo.html">Blog</a></li>
+<li><a href="/contact.html">Contact Us</a></li>
+<li><a href="/privacy.html">Privacy Policy</a></li>
+</ul>
+</nav>
+</header>
+<main>
+<section class="compressor-section">
+<h1 id="title">Compress Image to 50KB</h1>
+<p id="description">Many application forms, ID-photo uploaders and signup pages set a 50 KB upload limit. Choose your photo and this tool shrinks it to 50 KB or less, lowering quality first and reducing dimensions only when it has to. Everything runs in your browser, so your image is never uploaded.</p>
 <form id="compressForm">
-<label for="imageInput">Choose an image (JPG, PNG or WebP):</label><br>
-<input type="file" id="imageInput" accept="image/jpeg,image/png,image/webp" required><br>
-<label for="targetKb">Target size (KB):</label>
+<label for="imageInput">Choose an image to compress (JPG, PNG or WebP):</label>
+<input type="file" id="imageInput" accept="image/jpeg,image/png,image/webp" required>
+<div id="previewContainer"><img id="imagePreview" alt="Preview of the selected image" style="display:none"></div>
+<div id="originalSpecs" class="image-specs" style="display:none">
+<h2>Original Image Specifications</h2>
+<div class="specs-grid">
+<div class="spec-item"><span class="spec-label">Dimensions:</span> <span class="spec-value" id="originalDimensions">-</span></div>
+<div class="spec-item"><span class="spec-label">File Size:</span> <span class="spec-value" id="originalSize">-</span></div>
+<div class="spec-item"><span class="spec-label">Format:</span> <span class="spec-value" id="originalFormat">-</span></div>
+</div>
+</div>
+<label for="targetKb">Target size: <span id="targetValue">50</span> KB</label>
 <input type="number" id="targetKb" value="50" min="5" max="5000">
-<button type="submit" id="compressBtn">Compress to target size</button>
+<button type="submit" id="compressBtn">Compress to 50KB</button>
 <p id="status" role="status" aria-live="polite"></p>
 </form>
-<div id="result"><h2>Result</h2><p id="resultInfo"></p><img id="resultImg" alt="Compressed image preview"><p><a id="downloadBtn" href="#" download>Download compressed image</a></p></div>
-<h2>How to compress an image to 50KB</h2>
-<ol><li>Choose your JPG, PNG or WebP file.</li><li>Leave the target at 50 KB, or change it.</li><li>Click <strong>Compress to target size</strong>.</li><li>Download the result.</li></ol>
-<h2>Good for</h2><ul><li>Profile and ID photos for application forms</li><li>Signature and document scans</li><li>Small thumbnails for emails and chat</li></ul>
-<h2>Frequently asked questions</h2>
-<details><summary>Will my photo look bad at 50 KB?</summary><p>A 50 KB target is small, so large photos are usually scaled down as well as compressed. Small portraits and signatures stay clear; detailed full-size photos lose fine detail.</p></details>
-<details><summary>Are my images uploaded to a server?</summary><p>No. Compression happens in your browser, so your images never leave your device.</p></details>
-<details><summary>Which formats are supported?</summary><p>JPG, PNG and WebP. JPG stays JPG. PNG and WebP are saved as WebP to keep transparency, and in browsers that cannot create WebP they are saved as JPG with a white background.</p></details>
-<details><summary>What if my image is already smaller than the target?</summary><p>The tool tells you and keeps your original file unchanged.</p></details>
-<h2>Other sizes</h2><p><a href="/compress-image-to-100kb.html">Compress to 100KB</a> · <a href="/compress-image-to-200kb.html">Compress to 200KB</a> · <a href="/">All-purpose image compressor</a></p>
+<div id="outputContainer" style="display:none">
+<h2>Compression Result</h2>
+<div class="comparison-container">
+<div class="comparison-box"><h3>Original</h3><img id="resultOriginalImage" alt="Original image"><p>File Size: <strong id="resultOriginalSize">-</strong></p></div>
+<div class="comparison-box"><h3>After Compression</h3><img id="compressedImage" alt="Compressed image"><p>File Size: <strong id="compressedSize">-</strong></p><div class="compression-ratio" id="compressionRatioDisplay"></div></div>
+</div>
+<a id="downloadBtn" href="#" download>Download Compressed Image</a>
+</div>
+</section>
+<section class="how-to-use">
+<h2>How to Compress an Image to 50KB</h2>
+<ol><li>Choose your JPG, PNG or WebP file.</li><li>Leave the target at 50 KB, or change it.</li><li>Click <strong>Compress to 50KB</strong>.</li><li>Download the result.</li></ol>
+<p>Good for:</p><ul><li>Profile and ID photos for application forms</li><li>Signature and document scans</li><li>Small thumbnails for emails and chat</li></ul>
+</section>
+<section class="home-blog">
+<h2>Other Sizes</h2>
+<p><a href="/compress-image-to-100kb.html">Compress image to 100KB</a> · <a href="/compress-image-to-200kb.html">Compress image to 200KB</a></p>
+<a href="/" class="read-more">All-purpose image compressor →</a>
+</section>
+<section class="faq-section">
+<h2 class="faq-title">Frequently Asked Questions</h2>
+<div class="faq-item"><button class="faq-question" type="button">Will my photo look bad at 50 KB?<span class="faq-icon">+</span></button><div class="faq-answer"><p>A 50 KB target is small, so large photos are usually scaled down as well as compressed. Small portraits and signatures stay clear; detailed full-size photos lose fine detail.</p></div></div>
+<div class="faq-item"><button class="faq-question" type="button">Are my images uploaded to a server?<span class="faq-icon">+</span></button><div class="faq-answer"><p>No. Compression happens in your browser, so your images never leave your device.</p></div></div>
+<div class="faq-item"><button class="faq-question" type="button">Which formats are supported?<span class="faq-icon">+</span></button><div class="faq-answer"><p>JPG, PNG and WebP. JPG stays JPG. PNG and WebP are saved as WebP to keep transparency, and in browsers that cannot create WebP they are saved as JPG with a white background.</p></div></div>
+<div class="faq-item"><button class="faq-question" type="button">What if my image is already smaller than the target?<span class="faq-icon">+</span></button><div class="faq-answer"><p>The tool tells you and keeps your original file unchanged.</p></div></div>
+</section>
 </main>
-<footer style="background:#000;padding:20px;text-align:center;font-size:14px;"><p style="color:#e0e0e0;">© 2026 ImgCompressor.shop · <a href="/about.html" style="color:#4da3ff;">About</a> | <a href="/contact.html" style="color:#4da3ff;">Contact</a> | <a href="/privacy.html" style="color:#4da3ff;">Privacy Policy</a></p></footer>
+<footer style="background:#000;padding:20px;text-align:center;font-size:14px;">
+<p style="color:#e0e0e0;">© 2026 ImgCompressor.shop · <a href="/about.html" style="color:#4da3ff;">About</a> | <a href="/contact.html" style="color:#4da3ff;">Contact</a> | <a href="/privacy.html" style="color:#4da3ff;">Privacy Policy</a></p>
+</footer>
 <script src="/target-size.js"></script>
 </body>
 </html>
