@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>How Image Compression Improves SEO | Faster Rankings Guide</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4CAF50">
+  <meta name="author" content="ImgCompressor.shop">
 
+  <title>How Image Compression Improves SEO | Faster Rankings Guide</title>
   <meta name="description" content="Learn how image compression improves SEO by boosting page speed, Core Web Vitals, mobile performance, and Google rankings. Complete guide.">
   <meta name="keywords" content="image compression seo, image optimization, website speed seo, compress images for seo">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="canonical" href="https://www.imgcompressor.shop/blog/how-image-compression-improves-seo.html">
+  <link rel="icon" href="/logo.webp">
 
-  <!-- OPEN GRAPH -->
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ImgCompressor.shop">
   <meta property="og:title" content="How Image Compression Improves SEO">
   <meta property="og:description" content="Discover how compressing images improves page speed, Core Web Vitals, and SEO rankings.">
-  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://www.imgcompressor.shop/preview.jpg">
   <meta property="og:url" content="https://www.imgcompressor.shop/blog/how-image-compression-improves-seo.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How Image Compression Improves SEO">
+  <meta name="twitter:description" content="Discover how compressing images improves page speed, Core Web Vitals, and SEO rankings.">
+  <meta name="twitter:image" content="https://www.imgcompressor.shop/preview.jpg">
 
-  <!-- ARTICLE SCHEMA -->
+  <!-- Article schema (add "datePublished": "YYYY-MM-DD" after "image" once you decide the date) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "How Image Compression Improves SEO",
     "description": "A complete guide explaining how image compression improves SEO, page speed, and Core Web Vitals.",
-    "author": {
-      "@type": "Organization",
-      "name": "IMGCompressor.shop"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "IMGCompressor.shop"
-    },
+    "image": "https://www.imgcompressor.shop/preview.jpg",
+    "author": { "@type": "Organization", "name": "IMGCompressor.shop" },
+    "publisher": { "@type": "Organization", "name": "IMGCompressor.shop" },
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://www.imgcompressor.shop/blog/how-image-compression-improves-seo.html"
@@ -39,369 +42,327 @@
   </script>
 
   <style>
- 
- header {
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-}
-
-  h1 {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  color: #fff!important;
-  font-size: 32px;
-  font-weight: 700;
-  margin: 30px 0 20px;
-  line-height: 1.3;
-}
-    h1, h2, h3 {
-  scroll-margin-top: 100px;
-}
-
-.blog-content {
-  padding-top: 50px; /* adjust based on header height */
-}
-.blog-content h1 {
-  display: block;
-  color: #000;
-  margin-top: 90px;
-  font-size: 34px;
-}
-
- body {
-      font-family: Arial, sans-serif;
-      background: #fff;
+    :root {
+      --green: #4CAF50;
+      --green-dark: #388E3C;
+      --text: #222;
+      --muted: #666;
+      --border: #e2e5e9;
+      --bg-soft: #f6f8f6;
+    }
+    * { box-sizing: border-box; }
+    body {
       margin: 0;
-      color: #222;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
       line-height: 1.7;
-    }
-    header, footer {
-      background: #111;
-      color: #fff;
-      text-align: center;
-      padding: 16px;
-    }
-    main {
-      max-width: 900px;
-      margin: auto;
+      color: var(--text);
       background: #fff;
-      padding: 30px;
     }
-    h1, h2, h3 {
-      color: #000;
+    a { color: var(--green-dark); }
+
+    /* Header */
+    .site-header { border-bottom: 1px solid var(--border); background: #fff; position: sticky; top: 0; z-index: 100; }
+    .site-header__inner {
+      max-width: 1000px; margin: 0 auto; padding: 12px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
-    h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
+    .site-header__logo img { height: 40px; width: auto; display: block; }
+    .site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; flex-wrap: wrap; }
+    .site-nav a { text-decoration: none; color: var(--text); font-weight: 500; }
+    .site-nav a:hover, .site-nav a.is-active { color: var(--green-dark); }
+
+    /* Article */
+    .page { max-width: 760px; margin: 0 auto; padding: 32px 20px 60px; }
+    .blog-post h1 { font-size: 2rem; line-height: 1.25; margin: 0 0 8px; }
+    .blog-post__subtitle { color: var(--muted); font-size: 1.1rem; margin: 0 0 28px; }
+    .blog-post h2 { font-size: 1.5rem; margin: 2.2rem 0 .6rem; scroll-margin-top: 90px; }
+    .blog-post h3 { font-size: 1.25rem; margin: 1.8rem 0 .4rem; }
+    .blog-post h4 { font-size: 1.1rem; margin: 1.4rem 0 .3rem; }
+    .blog-post p { margin: 0 0 1rem; }
+    .blog-post ul, .blog-post ol { padding-left: 22px; margin: 0 0 1rem; }
+
+    /* Figures */
+    .blog-figure { text-align: center; margin: 24px auto; max-width: 100%; }
+    .blog-figure img { max-width: 100%; height: auto; display: block; margin: 0 auto; border: 1px solid var(--border); border-radius: 6px; }
+
+    /* CTA */
+    .blog-cta {
+      background: var(--bg-soft); border: 1px solid var(--border); border-left: 4px solid var(--green);
+      border-radius: 6px; padding: 20px; margin: 36px 0;
     }
-    h2 {
-      margin-top: 30px;
-      font-size: 24px;
+    .blog-cta h3 { margin-top: 0; }
+    .blog-cta__button {
+      display: inline-block; background: var(--green); color: #fff !important; padding: 10px 20px;
+      border-radius: 6px; text-decoration: none; font-weight: 600;
     }
-    p {
-      margin: 15px 0;
-    }
-    ul {
-      margin-left: 20px;
-    }
-    .cta {
-      background: #f1f8ff;
-      border-left: 4px solid #007bff;
-      padding: 20px;
-      margin-top: 30px;
-    }
-    a {
-      color: #007bff;
-      text-decoration: none;
-      font-weight: bold;
+    .blog-cta__button:hover { background: var(--green-dark); }
+
+    /* Footer */
+    .site-footer { border-top: 1px solid var(--border); background: var(--bg-soft); text-align: center; padding: 24px 20px; font-size: .9rem; color: var(--muted); }
+    .site-footer a { margin: 0 6px; }
+
+    @media (max-width: 600px) {
+      .blog-post h1 { font-size: 1.6rem; }
     }
   </style>
 </head>
-
 <body>
 
-<header>
-  <h1>How Image Compression Improves SEO</h1>
-  <p>Complete Guide to Faster Rankings & Better Performance</p>
-</header>
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-header__logo" href="/index.html">
+        <img src="/logo.webp" alt="IMGCompressor.shop – Free Online Image Compressor">
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/about.html">About Us</a></li>
+          <li><a class="is-active" href="/blog/how-image-compression-improves-seo.html">Blog</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<main>
+  <!-- ===== ARTICLE ===== -->
+  <main class="page">
+    <article class="blog-post">
 
-  <p>
-    Website speed, user experience, and search engine rankings are closely connected.
-    One of the most overlooked but powerful SEO techniques is <strong>image compression</strong>.
-  </p>
+      <h1>How Image Compression Improves SEO</h1>
+      <p class="blog-post__subtitle">Complete Guide to Faster Rankings &amp; Better Performance</p>
 
-  <h2>What Is Image Compression?</h2>
-          
-      <img src="slide1-optimized.webp" width="380" height="214" alt="Slide1">
-      
-  <p>
-    Image compression is the process of reducing an image’s file size without significantly affecting visual quality.
-    This improves website performance and loading speed.
-  </p>
+      <p>
+        Website speed, user experience, and search engine rankings are closely connected.
+        One of the most overlooked but powerful SEO techniques is <strong>image compression</strong>.
+      </p>
 
-  <h2>Why Image Compression Matters for SEO</h2>
-  <p>
-    Google prioritizes fast, user-friendly websites. Large image files slow down pages and negatively impact rankings.
-  </p>
+      <h2 id="what-is-image-compression">What Is Image Compression?</h2>
+      <figure class="blog-figure">
+        <img src="/blog/slide1-optimized.webp" width="380" height="214" alt="Image compression reducing file size while keeping quality" loading="lazy">
+      </figure>
+      <p>
+        Image compression is the process of reducing an image’s file size without significantly affecting visual quality.
+        This improves website performance and loading speed.
+      </p>
 
-  <h2>1. Faster Page Speed (Major Ranking Factor)</h2>
-  <p>
-    Page speed is a confirmed Google ranking factor. Compressed images load faster,
-    reduce server load, and improve user experience.
-  </p>
+      <h2 id="why-it-matters">Why Image Compression Matters for SEO</h2>
+      <p>
+        Google prioritizes fast, user-friendly websites. Large image files slow down pages and negatively impact rankings.
+      </p>
 
-  <h2>2. Improved Core Web Vitals</h2>
-  <p>
-    Image optimization directly impacts Core Web Vitals such as LCP, CLS, and INP.
-    Faster image loading improves these metrics significantly.
-  </p>
+      <h2 id="faster-page-speed">1. Faster Page Speed (Major Ranking Factor)</h2>
+      <p>
+        Page speed is a confirmed Google ranking factor. Compressed images load faster,
+        reduce server load, and improve user experience.
+      </p>
 
-  <h2>3. Better Mobile SEO Performance</h2>
-  <p>
-    Google uses mobile-first indexing. Compressed images load quickly on mobile devices,
-    improving rankings and reducing bounce rate.
-  </p>
+      <h2 id="core-web-vitals">2. Improved Core Web Vitals</h2>
+      <p>
+        Image optimization directly impacts Core Web Vitals such as LCP, CLS, and INP.
+        Faster image loading improves these metrics significantly.
+      </p>
 
-  <h2>4. Lower Bounce Rate & Higher Engagement</h2>
-  <p>
-    Slow pages drive users away. Optimized images help visitors stay longer,
-    increasing engagement and SEO performance.
-  </p>
+      <h2 id="mobile-seo">3. Better Mobile SEO Performance</h2>
+      <p>
+        Google uses mobile-first indexing. Compressed images load quickly on mobile devices,
+        improving rankings and reducing bounce rate.
+      </p>
 
-  <h2>5. Improved Crawl Budget</h2>
-  <p>
-    Smaller pages allow search engines to crawl more content efficiently,
-    which improves indexing and visibility.
-  </p>
+      <h2 id="bounce-rate">4. Lower Bounce Rate &amp; Higher Engagement</h2>
+      <p>
+        Slow pages drive users away. Optimized images help visitors stay longer,
+        increasing engagement and SEO performance.
+      </p>
 
-  <h2>6. Better Image Search Rankings</h2>
-  <p>
-    Optimized images rank better in Google Images when combined with proper file names,
-    ALT text, and compression.
-  </p>
+      <h2 id="crawl-budget">5. Improved Crawl Budget</h2>
+      <p>
+        Smaller pages allow search engines to crawl more content efficiently,
+        which improves indexing and visibility.
+      </p>
 
-  <h2>Best Image Formats for SEO</h2>
-  <ul>
-    <li><strong>JPG / JPEG</strong> – Best for photos</li>
-    <li><strong>PNG</strong> – Logos and transparency</li>
-    <li><strong>WebP</strong> – Best overall format for SEO</li>
-  </ul>
+      <h2 id="image-search">6. Better Image Search Rankings</h2>
+      <p>
+        Optimized images rank better in Google Images when combined with proper file names,
+        ALT text, and compression.
+      </p>
 
-  <h2>Does Image Compression Reduce Quality?</h2>
-  <p>
-    When done correctly, image compression does not noticeably reduce quality.
-    Modern tools balance size reduction with visual clarity.
-  </p>
+      <h2 id="best-formats">Best Image Formats for SEO</h2>
+      <ul>
+        <li><strong>JPG / JPEG</strong> – Best for photos</li>
+        <li><strong>PNG</strong> – Logos and transparency</li>
+        <li><strong>WebP</strong> – Best overall format for SEO</li>
+      </ul>
 
-  <h2>Final Verdict: Image Compression & SEO</h2>
-  <p>
-    Image compression is essential for modern SEO. Faster loading times,
-    better Core Web Vitals, and improved user experience lead to higher rankings.
-  </p>
-  <section class="content-area">
+      <h2 id="quality-loss">Does Image Compression Reduce Quality?</h2>
+      <p>
+        When done correctly, image compression does not noticeably reduce quality.
+        Modern tools balance size reduction with visual clarity.
+      </p>
 
-  <h2>Best Online Image Compression Tools to Optimize Images for the Web</h2>
+      <h2 id="final-verdict">Final Verdict: Image Compression &amp; SEO</h2>
+      <p>
+        Image compression is essential for modern SEO. Faster loading times,
+        better Core Web Vitals, and improved user experience lead to higher rankings.
+      </p>
 
-  <p>
-    Website speed plays a critical role in search engine rankings and user experience.
-    Using reliable <strong>online image compression tools</strong> helps reduce image size
-    without sacrificing quality, making your site faster and more efficient.
-  </p>
+      <!-- ===== SECOND PART: TOOLS GUIDE ===== -->
+      <h2 id="best-online-tools">Best Online Image Compression Tools to Optimize Images for the Web</h2>
 
-  <p>
-    Whether you are a blogger, designer, or website owner, choosing the right
-    <strong>image compression tool</strong> is essential for improving performance and SEO.
-  </p>
+      <p>
+        Website speed plays a critical role in search engine rankings and user experience.
+        Using reliable <strong>online image compression tools</strong> helps reduce image size
+        without sacrificing quality, making your site faster and more efficient.
+      </p>
+      <p>
+        Whether you are a blogger, designer, or website owner, choosing the right
+        <strong>image compression tool</strong> is essential for improving performance and SEO.
+      </p>
 
-  <h3>What Is Image Compression and Why It Matters</h3>
+      <h3>What Is Image Compression and Why It Matters</h3>
+      <p>
+        Image compression is the process of reducing file size while preserving visual clarity.
+        A good <strong>photo compression tool</strong> allows you to load pages faster,
+        save bandwidth, and improve user engagement.
+      </p>
+      <p>
+        When you <strong>compress images for web</strong>, your website benefits from better
+        Core Web Vitals scores and improved visibility in search results.
+      </p>
 
-  <p>
-    Image compression is the process of reducing file size while preserving visual clarity.
-    A good <strong>photo compression tool</strong> allows you to load pages faster,
-    save bandwidth, and improve user engagement.
-  </p>
+      <h3>Online Image Compression Tools vs Software</h3>
 
-  <p>
-    When you <strong>compress images for web</strong>, your website benefits from better
-    Core Web Vitals scores and improved visibility in search results.
-  </p>
+      <h4>Online Image Compression Tools</h4>
+      <p>
+        An <strong>image compression online tool</strong> works directly in your browser.
+        You don’t need to install any <strong>image compression software</strong>,
+        making it ideal for quick and secure optimization.
+      </p>
+      <ul>
+        <li>No installation required</li>
+        <li>Works on all devices</li>
+        <li>Fast and easy to use</li>
+        <li>Ideal for quick image optimization</li>
+      </ul>
+      <p>
+        A <strong>free online image compression tool</strong> is perfect for users who want
+        instant results without technical knowledge.
+      </p>
 
-  <h3>Online Image Compression Tools vs Software</h3>
+      <h3>Image Compression Software</h3>
+      <p>
+        Desktop-based <strong>photo compression software</strong> offers advanced features such
+        as batch processing and offline access. Many users also rely on
+        <strong>free image compression software</strong> for basic needs.
+      </p>
 
-  <h4>Online Image Compression Tools</h4>
+      <h3>Image Compression in Photoshop</h3>
+      <p>
+        Designers often use <strong>image compression in Photoshop</strong> for precise control
+        over image quality. With options like “Save for Web,”
+        <strong>photoshop image compression</strong> allows you to choose file size,
+        format, and resolution manually.
+      </p>
+      <p>
+        While Photoshop is powerful, an <strong>image compression software online</strong>
+        solution is usually faster for everyday use.
+      </p>
 
-  <p>
-    An <strong>image compression online tool</strong> works directly in your browser.
-    You don’t need to install any <strong>image compression software</strong>,
-    making it ideal for quick and secure optimization.
-  </p>
+      <h3>Best Image Compression Tools Available Online</h3>
+      <p>
+        There are many <strong>best image compression tools</strong> available today.
+        Popular solutions include browser-based tools and well-known platforms like the
+        <strong>ShortPixel image compression tool</strong>.
+      </p>
+      <p>
+        These tools allow you to <strong>compress image for website</strong> use while
+        maintaining high visual quality.
+      </p>
 
-  <ul>
-    <li>No installation required</li>
-    <li>Works on all devices</li>
-    <li>Fast and easy to use</li>
-    <li>Ideal for quick image optimization</li>
-  </ul>
+      <h3>Free Image Compression Tools for Web Optimization</h3>
+      <p>
+        A reliable <strong>free image compression tool</strong> helps reduce file size
+        efficiently. Using a <strong>compression image tool</strong>,
+        you can optimize JPG, PNG, and WebP images with just a few clicks.
+      </p>
+      <p>
+        Many <strong>image compression websites</strong> support bulk uploads and smart
+        compression, making them ideal for web projects.
+      </p>
 
-  <p>
-    A <strong>free online image compression tool</strong> is perfect for users who want
-    instant results without technical knowledge.
-  </p>
+      <h3>Google Image Compression and SEO Benefits</h3>
+      <p>
+        <strong>Google image compression</strong> best practices focus on fast loading,
+        mobile responsiveness, and optimized file formats.
+      </p>
+      <p>
+        Using proper <strong>image compression web</strong> techniques helps improve
+        page speed scores and boosts rankings in Google Image Search.
+      </p>
 
-  <h3>Image Compression Software</h3>
+      <h3>Best Image Compression Format for the Web</h3>
+      <p>Choosing the <strong>best image compression format</strong> is essential:</p>
+      <ul>
+        <li><strong>JPEG</strong> – Best for photographs</li>
+        <li><strong>PNG</strong> – Best for transparency</li>
+        <li><strong>WebP</strong> – Best compression image format for modern websites</li>
+      </ul>
+      <p>
+        If you want the <strong>best compression image format</strong>,
+        WebP provides excellent quality with smaller file sizes.
+      </p>
 
-  <p>
-    Desktop-based <strong>photo compression software</strong> offers advanced features such
-    as batch processing and offline access. Many users also rely on
-    <strong>free image compression software</strong> for basic needs.
-  </p>
+      <h3>How to Compress Images for Web Properly</h3>
+      <p>To <strong>compress image for web</strong> effectively:</p>
+      <ol>
+        <li>Select a trusted <strong>compress image tool</strong></li>
+        <li>Upload your original image</li>
+        <li>Apply smart compression</li>
+        <li>Download the optimized file</li>
+        <li>Upload it to your website</li>
+      </ol>
+      <p>
+        This process ensures smooth <strong>image compress web</strong> performance and
+        faster page loading.
+      </p>
 
-  <h3>Image Compression in Photoshop</h3>
+      <h3>Final Thoughts</h3>
+      <p>
+        Whether you use an <strong>online photo compression tool</strong>,
+        desktop <strong>image compression software</strong>,
+        or a modern <strong>image compression website</strong>,
+        optimizing images is essential for success online.
+      </p>
+      <p>
+        The right <strong>compress image tools</strong> help you improve website speed,
+        enhance SEO, and deliver a better user experience through effective
+        <strong>image optimize web</strong> strategies.
+      </p>
 
-  <p>
-    Designers often use <strong>image compression in Photoshop</strong> for precise control
-    over image quality. With options like “Save for Web,”
-    <strong>photoshop image compression</strong> allows you to choose file size,
-    format, and resolution manually.
-  </p>
+      <!-- ===== CTA ===== -->
+      <aside class="blog-cta">
+        <h3>Compress Images Easily</h3>
+        <p>
+          Use <a href="https://www.imgcompressor.shop/">IMGCompressor.shop</a> to compress images online for free
+          and improve your website speed and SEO instantly.
+        </p>
+        <a class="blog-cta__button" href="/index.html">Compress an image</a>
+      </aside>
 
-  <p>
-    While Photoshop is powerful, an <strong>image compression software online</strong>
-    solution is usually faster for everyday use.
-  </p>
+    </article>
+  </main>
 
-  <h3>Best Image Compression Tools Available Online</h3>
-
-  <p>
-    There are many <strong>best image compression tools</strong> available today.
-    Popular solutions include browser-based tools and well-known platforms like the
-    <strong>ShortPixel image compression tool</strong>.
-  </p>
-
-  <p>
-    These tools allow you to <strong>compress image for website</strong> use while
-    maintaining high visual quality.
-  </p>
-
-  <h3>Free Image Compression Tools for Web Optimization</h3>
-
-  <p>
-    A reliable <strong>free image compression tool</strong> helps reduce file size
-    efficiently. Using a <strong>compression image tool</strong>,
-    you can optimize JPG, PNG, and WebP images with just a few clicks.
-  </p>
-
-  <p>
-    Many <strong>image compression websites</strong> support bulk uploads and smart
-    compression, making them ideal for web projects.
-  </p>
-
-  <h3>Google Image Compression and SEO Benefits</h3>
-
-  <p>
-    <strong>Google image compression</strong> best practices focus on fast loading,
-    mobile responsiveness, and optimized file formats.
-  </p>
-
-  <p>
-    Using proper <strong>image compression web</strong> techniques helps improve
-    page speed scores and boosts rankings in Google Image Search.
-  </p>
-
-  <h3>Best Image Compression Format for the Web</h3>
-
-  <p>
-    Choosing the <strong>best image compression format</strong> is essential:
-  </p>
-
-  <ul>
-    <li><strong>JPEG</strong> – Best for photographs</li>
-    <li><strong>PNG</strong> – Best for transparency</li>
-    <li><strong>WebP</strong> – Best compression image format for modern websites</li>
-  </ul>
-
-  <p>
-    If you want the <strong>best compression image format</strong>,
-    WebP provides excellent quality with smaller file sizes.
-  </p>
-
-  <h3>How to Compress Images for Web Properly</h3>
-
-  <p>
-    To <strong>compress image for web</strong> effectively:
-  </p>
-
-  <ol>
-    <li>Select a trusted <strong>compress image tool</strong></li>
-    <li>Upload your original image</li>
-    <li>Apply smart compression</li>
-    <li>Download the optimized file</li>
-    <li>Upload it to your website</li>
-  </ol>
-
-  <p>
-    This process ensures smooth <strong>image compress web</strong> performance and
-    faster page loading.
-  </p>
-
-  <h3>Final Thoughts</h3>
-
-  <p>
-    Whether you use an <strong>online photo compression tool</strong>,
-    desktop <strong>image compression software</strong>,
-    or a modern <strong>image compression website</strong>,
-    optimizing images is essential for success online.
-  </p>
-
-  <p>
-    The right <strong>compress image tools</strong> help you improve website speed,
-    enhance SEO, and deliver a better user experience through effective
-    <strong>image optimize web</strong> strategies.
-  </p>
-
-</section>
-
-
-  <div class="cta">
-    <h3>Compress Images Easily</h3>
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
     <p>
-      Use <a href="https://www.imgcompressor.shop/">IMGCompressor.shop</a> to compress images online for free
-      and improve your website speed and SEO instantly.
+      &copy; 2026 IMGCompressor.shop ·
+      <a href="/about.html">About</a> |
+      <a href="/contact.html">Contact</a> |
+      <a href="/privacy.html">Privacy Policy</a>
     </p>
-  </div>
-
-</main>
-
-<footer>
-  <p>© 2026 IMGCompressor.shop | All Rights Reserved</p>
-</footer>
+    <p>Free online tools for image compression and optimization.</p>
+  </footer>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
