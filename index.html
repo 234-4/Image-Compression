@@ -216,7 +216,40 @@ body > header.site-header .nav-toggle { display:none; }
   font-family: Arial, Helvetica, sans-serif;
   color: #222;
 }
-
+.how-to-use {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 0 20px;
+    color: #222;
+    line-height: 1.6;
+  }
+  .how-to-use__title { text-align: center; font-size: 1.75rem; margin: 0 0 8px; }
+  .how-to-use__intro { text-align: center; color: #5f6368; margin: 0 auto 28px; max-width: 620px; }
+ 
+  .how-steps { list-style: none; margin: 0 0 32px; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); counter-reset: step; }
+  .how-step { position: relative; background: #fff; border: 1px solid #e2e5e9; border-radius: 10px; padding: 22px 18px 18px; counter-increment: step; }
+  .how-step::before {
+    content: counter(step);
+    display: flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; margin-bottom: 12px;
+    background: #4CAF50; color: #fff; font-weight: 700; border-radius: 50%;
+  }
+  .how-step h3 { margin: 0 0 6px; font-size: 1.05rem; }
+  .how-step p { margin: 0; font-size: 0.95rem; color: #444; }
+ 
+  .how-quality { background: #f6f8f6; border: 1px solid #e2e5e9; border-radius: 10px; padding: 20px; margin: 0 0 24px; }
+  .how-quality h3 { margin: 0 0 12px; font-size: 1.1rem; }
+  .how-quality__grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .how-quality__item { background: #fff; border: 1px solid #e2e5e9; border-radius: 8px; padding: 12px 14px; }
+  .how-quality__item--best { border-color: #4CAF50; }
+  .how-quality__range { display: block; font-weight: 700; color: #2e7d32; }
+  .how-quality__label { display: block; font-weight: 600; margin-bottom: 2px; }
+  .how-quality__item p { margin: 0; font-size: 0.9rem; color: #444; }
+ 
+  .how-tips { margin: 0; padding-left: 1.2em; }
+  .how-tips li { margin-bottom: 8px; }
+  .how-tips-title { margin: 0 0 10px; font-size: 1.1rem; }
+<
 .seo-article h1 {
   font-size: 32px;
   margin-bottom: 15px;
@@ -444,23 +477,58 @@ body > header.site-header .nav-toggle { display:none; }
       <a id="downloadBtn" href="#" download>Download Compressed Image</a>
     </div>
   </section>
-  <section class="how-to-use">
-    <h2>How to Use the Image Compressor</h2>
-    <ol>
-      <li>Choose an image with the file picker.</li>
-      <li>Set the quality slider:
-        <ul>
-          <li><strong>80–90%</strong> – slight size reduction, almost no visible change</li>
-          <li><strong>60–70%</strong> – balanced, recommended for web use</li>
-          <li><strong>Below 50%</strong> – maximum reduction, noticeable quality loss</li>
-        </ul>
-      </li>
-      <li>Click <strong>Compress</strong>.</li>
-      <li>Click <strong>Download Compressed Image</strong>.</li>
-    </ol>
-    <p>JPG files stay JPG. PNG files are saved as WebP so transparency is preserved. If a file is already well optimized, your original is kept.</p>
-  </section>
+ <section class="how-to-use" id="how-to-use">
+  <h2 class="how-to-use__title">How to Use the Image Compressor</h2>
+  <p class="how-to-use__intro">Compress a photo in four quick steps. Everything runs in your browser, so your image is never uploaded.</p>
  
+  <ol class="how-steps">
+    <li class="how-step">
+      <h3>Choose your image</h3>
+      <p>Click the file picker and select a JPG, PNG or WebP image. Its dimensions, file size and format appear so you know what you are starting with.</p>
+    </li>
+    <li class="how-step">
+      <h3>Set the quality</h3>
+      <p>Move the slider between 10% and 100%. It starts at 70%, a good balance for most photos.</p>
+    </li>
+    <li class="how-step">
+      <h3>Click Compress</h3>
+      <p>The compressed version is created on your device in a moment, with no upload and no waiting in a queue.</p>
+    </li>
+    <li class="how-step">
+      <h3>Compare and download</h3>
+      <p>Check the original and compressed images side by side, along with the new file size, then click <strong>Download Compressed Image</strong>.</p>
+    </li>
+  </ol>
+ 
+  <div class="how-quality">
+    <h3>Which quality setting should I choose?</h3>
+    <div class="how-quality__grid">
+      <div class="how-quality__item">
+        <span class="how-quality__range">80–100%</span>
+        <span class="how-quality__label">Near original</span>
+        <p>A small size reduction with almost no visible change. Best for photos you want to keep sharp.</p>
+      </div>
+      <div class="how-quality__item how-quality__item--best">
+        <span class="how-quality__range">60–79%</span>
+        <span class="how-quality__label">Balanced (recommended)</span>
+        <p>A good mix of smaller size and quality. A sensible choice for websites, email and social media.</p>
+      </div>
+      <div class="how-quality__item">
+        <span class="how-quality__range">Below 60%</span>
+        <span class="how-quality__label">Smallest file</span>
+        <p>The biggest reduction, with noticeable quality loss. Use it only when you need a very small file.</p>
+      </div>
+    </div>
+  </div>
+ 
+  <h3 class="how-tips-title">Good to know</h3>
+  <ul class="how-tips">
+    <li><strong>JPG stays JPG.</strong> PNG files are saved as WebP, which keeps transparent backgrounds while making the file smaller.</li>
+    <li><strong>Already optimized?</strong> If the compressed version would not be smaller, your original file is kept.</li>
+    <li><strong>Always check the preview.</strong> If the result looks too soft, raise the quality and compress again.</li>
+    <li><strong>Start from the original photo.</strong> Compressing an image that was already compressed removes more detail each time.</li>
+  </ul>
+</section> 
 <section class="home-blog">
     <h2>Image Compression Guides</h2>
     <p>Learn how to shrink image files without making them look worse, and how smaller images can help your pages load faster.</p>
