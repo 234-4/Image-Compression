@@ -190,88 +190,25 @@ window.addEventListener('DOMContentLoaded', function() {
   color: #fff;
   cursor: pointer;
 }
-       /* Add these styles to your existing CSS section */
-.nav-toggle {
-    display: none;
-}
+ /* ===== Header (matches blog pages) ===== */
+body > header.site-header { background:#fff; border-bottom:1px solid #e2e5e9; position:sticky; top:0; z-index:100; padding:0; box-shadow:none; }
+body > header.site-header nav { max-width:1000px; margin:0 auto; padding:12px 20px; display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:16px; position:relative; background:transparent; }
+body > header.site-header .logo { display:block; z-index:1001; }
+body > header.site-header .logo img { height:40px; width:auto; display:block; }
+body > header.site-header nav ul { display:flex; flex-direction:row; flex-wrap:wrap; gap:20px; list-style:none; margin:0; padding:0; background:none; position:static; box-shadow:none; width:auto; }
+body > header.site-header nav ul li { margin:0; padding:0; width:auto; }
+body > header.site-header nav ul li a { color:#222; text-decoration:none; font-weight:500; font-size:1rem; padding:0; border:0; background:none; }
+body > header.site-header nav ul li a:hover,
+body > header.site-header nav ul li a.is-active { color:#388E3C; background:none; }
+body > header.site-header .nav-toggle { display:none; }
 
 @media (max-width: 768px) {
-    .nav-toggle {
-        display: block;
-        background: none;
-        border: none;
-        font-size: 24px;
-        color: #fff;
-        cursor: pointer;
-        padding: 10px;
-        position: absolute;
-        right: 20px;
-        top: 15px;
-        z-index: 1000;
-    }
-
-    nav {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 15px;
-    }
-
-    nav ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        position: absolute;
-        top: 70px;
-        left: 0;
-        z-index: 999;
-        padding: 20px 0;
-        margin: 0;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    nav ul.active {
-        display: flex;
-    }
-
-    nav ul li {
-        width: 100%;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-    }
-
-    nav ul li a {
-        display: block;
-        padding: 15px 20px;
-        color: #fff;
-        text-decoration: none;
-        font-size: 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        transition: background-color 0.3s;
-    }
-
-    nav ul li a:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-
-    nav ul li:last-child a {
-        border-bottom: none;
-    }
-
-    .logo {
-        z-index: 1001;
-        position: relative;
-    }
-}
-
-/* Add smooth transition */
-nav ul {
-    transition: all 0.3s ease-in-out;
-}
-       .seo-article {
+  body > header.site-header .nav-toggle { display:block; position:static; order:2; background:none; border:1px solid #e2e5e9; border-radius:6px; color:#222; font-size:22px; line-height:1; padding:8px 12px; cursor:pointer; }
+  body > header.site-header nav ul { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; gap:0; background:#fff; border-bottom:1px solid #e2e5e9; padding:8px 20px 16px; z-index:999; }
+  body > header.site-header nav ul.active { display:flex; }
+  body > header.site-header nav ul li a { display:block; padding:12px 0; border-bottom:1px solid #f0f2f0; }
+  body > header.site-header nav ul li:last-child a { border-bottom:0; }
+}       .seo-article {
   max-width: 900px;
   margin: 40px auto;
   padding: 20px;
@@ -444,26 +381,23 @@ nav ul {
 </head>
 <body>
    
-<!-- Add this to your header section, right after the nav opening tag -->
-<header>
-    <nav>
-        <button class="nav-toggle" aria-label="Toggle navigation menu">
-            ☰
-        </button>
-        
-        <a href="index.html" class="logo">
-            <img src="logo.webp" alt="IMGCompressor.shop – Free Online Image Compressor" width="137" height="60" class="nav-logo-img"/>
+<header class="site-header">
+    <nav aria-label="Main">
+        <button class="nav-toggle" aria-label="Toggle navigation menu">☰</button>
+
+        <a href="/index.html" class="logo">
+            <img src="/logo.webp" alt="IMGCompressor.shop – Free Online Image Compressor" width="137" height="60" class="nav-logo-img"/>
             <span class="logo-text"></span>
         </a>
         <ul>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="blog/how-image-compression-improves-seo.html">Blog</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a class="is-active" href="/index.html">Home</a></li>
+            <li><a href="/about.html">About Us</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/contact.html">Contact Us</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
         </ul>
     </nav>
 </header>
-
     <main>
        
          <section class="compressor-section">
