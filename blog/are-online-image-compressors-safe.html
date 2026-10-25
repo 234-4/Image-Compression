@@ -111,10 +111,12 @@
     align-items: center;
     gap: 12px 28px;
   }
-  header.site img { height: 40px; width: auto; display: block; }
-  header.site nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; }
-  header.site nav a { color: var(--text); text-decoration: none; font-weight: 500; }
-  header.site nav a:hover { color: var(--green-dark); }
+ .site-header { border-bottom: 1px solid var(--line); background: #fff; position: sticky; top: 0; z-index: 100; }
+.site-header__inner { max-width: 1000px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.site-header__logo img { height: 40px; width: auto; display: block; }
+.site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; flex-wrap: wrap; }
+.site-nav a { text-decoration: none; color: var(--text); font-weight: 500; }
+.site-nav a:hover, .site-nav a.is-active { color: var(--green-dark); }
   main { max-width: 760px; margin: 0 auto; padding: 28px 20px 60px; }
   .back { display: inline-block; margin-bottom: 18px; color: var(--green-dark); text-decoration: none; font-weight: 500; }
   .back:hover { text-decoration: underline; }
@@ -149,17 +151,21 @@
 
 <body>
 
-<header class="site">
-  <a href="https://www.imgcompressor.shop/index.html"><img src="https://www.imgcompressor.shop/logo.webp" alt="IMGCompressor.shop – Free Online Image Compressor"></a>
-  <nav aria-label="Main">
-    <ul>
-      <li><a href="https://www.imgcompressor.shop/index.html">Home</a></li>
-      <li><a href="https://www.imgcompressor.shop/about.html">About Us</a></li>
-      <li><a href="https://www.imgcompressor.shop/blog/">Blog</a></li>
-      <li><a href="https://www.imgcompressor.shop/contact.html">Contact Us</a></li>
-      <li><a href="https://www.imgcompressor.shop/privacy.html">Privacy Policy</a></li>
-    </ul>
-  </nav>
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="/index.html">
+      <img src="/logo.webp" alt="IMGCompressor.shop – Free Online Image Compressor">
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/about.html">About Us</a></li>
+        <li><a class="is-active" href="/blog/">Blog</a></li>
+        <li><a href="/contact.html">Contact Us</a></li>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
 <main>
