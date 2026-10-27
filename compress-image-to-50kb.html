@@ -36,10 +36,10 @@
  "mainEntity": [
   {
    "@type": "Question",
-   "name": "Will my photo look bad at 50 KB?",
+   "name": "Is 50 KB enough for a good photo?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "A 50 KB target is small, so large photos are usually scaled down as well as compressed. Small portraits and signatures stay clear; detailed full-size photos lose fine detail."
+    "text": "For small web images, profile pictures and ID-style photos, 50 KB can look fine on screen at a modest size, often around 600–800 px wide. It is not enough to preserve a full-resolution camera photo, and detailed images may look softer."
    }
   },
   {
@@ -70,18 +70,6 @@
 }
 </script>
 <style>
-.nav-toggle{display:none}
-nav ul{transition:all .3s ease-in-out}
-@media (max-width:768px){
-  .nav-toggle{display:block;background:none;border:none;font-size:24px;color:#fff;cursor:pointer;padding:10px;position:absolute;right:20px;top:15px;z-index:1000}
-  nav{position:relative;display:flex;flex-direction:column;align-items:flex-start;padding:15px}
-  nav ul{display:none;flex-direction:column;width:100%;background:rgba(0,0,0,.9);position:absolute;top:70px;left:0;z-index:999;padding:20px 0;margin:0;box-shadow:0 5px 15px rgba(0,0,0,.3)}
-  nav ul.active{display:flex}
-  nav ul li{width:100%;text-align:center;margin:0;padding:0}
-  nav ul li a{display:block;padding:15px 20px;color:#fff;text-decoration:none;font-size:16px;border-bottom:1px solid rgba(255,255,255,.1)}
-  nav ul li:last-child a{border-bottom:none}
-  .logo{z-index:1001;position:relative}
-}
 #status{min-height:1.2em;color:#b00020}
 .home-blog{max-width:900px;margin:60px auto;padding:25px;background:#fff;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,.05)}
 .home-blog h2{color:#000;margin-bottom:15px}
@@ -101,30 +89,56 @@ nav ul{transition:all .3s ease-in-out}
 .faq-icon{font-size:20px;transition:transform .3s ease}
 .faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease;background:#fff}
 .faq-answer p{padding:15px;margin:0;color:#333;line-height:1.6}
-.faq-item.active .faq-answer{max-height:200px}
+.faq-item.active .faq-answer{max-height:400px}
 .faq-item.active .faq-icon{transform:rotate(45deg)}
 .footer-language{margin-top:15px;text-align:center}
 .footer-language label{margin-right:8px;font-size:14px;color:#ccc}
 .footer-language select{padding:6px 10px;border-radius:6px;border:1px solid #555;background:#111;color:#fff;cursor:pointer}
+
+/* ===== Header (matches homepage and blog) ===== */
+header.sh { background:#fff; border-bottom:1px solid #e2e5e9; position:sticky; top:0; z-index:100; padding:0; margin:0; box-shadow:none; }
+header.sh .sh-inner { max-width:1000px; margin:0 auto; padding:12px 20px; display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:16px; position:relative; }
+header.sh .sh-logo { display:block; flex-shrink:0; }
+header.sh .sh-logo img { height:40px; width:auto; display:block; }
+header.sh .sh-nav { position:static; background:none; padding:0; }
+header.sh .sh-nav ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:row; flex-wrap:wrap; gap:20px; position:static; background:none; box-shadow:none; width:auto; }
+header.sh .sh-nav li { margin:0; padding:0; width:auto; text-align:left; }
+header.sh .sh-nav a { color:#222; text-decoration:none; font-weight:500; font-size:1rem; padding:0; border:0; background:none; display:inline; }
+header.sh .sh-nav a:hover, header.sh .sh-nav a.is-active { color:#388E3C; background:none; }
+header.sh .sh-toggle { display:none; }
+header.sh .sh-toggle:focus-visible, header.sh .sh-nav a:focus-visible, header.sh .sh-logo:focus-visible { outline:3px solid #1b5e20; outline-offset:2px; }
+@media (max-width:768px) {
+  header.sh.sh-js .sh-toggle { display:block; position:static; background:none; border:1px solid #e2e5e9; border-radius:6px; color:#222; font-size:22px; line-height:1; padding:8px 12px; cursor:pointer; }
+  header.sh.sh-js .sh-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-bottom:1px solid #e2e5e9; padding:8px 20px 16px; z-index:999; }
+  header.sh.sh-js .sh-nav.is-open { display:block; }
+  header.sh.sh-js .sh-nav ul { flex-direction:column; gap:0; }
+  header.sh.sh-js .sh-nav a { display:block; padding:12px 0; border-bottom:1px solid #f0f2f0; }
+  header.sh.sh-js .sh-nav li:last-child a { border-bottom:0; }
+}
 </style>
 </head>
 <body>
-<header>
-<nav>
-<button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
-<a href="/" class="logo"><img src="/logo.webp" alt="IMGCompressor.shop – Free Online Image Compressor" width="137" height="60" class="nav-logo-img"></a>
-<ul>
-<li><a href="/about.html">About Us</a></li>
-<li><a href="/blog/how-image-compression-improves-seo.html">Blog</a></li>
-<li><a href="/contact.html">Contact Us</a></li>
-<li><a href="/privacy.html">Privacy Policy</a></li>
-</ul>
-</nav>
+<header class="sh">
+  <div class="sh-inner">
+    <a class="sh-logo" href="/">
+      <img src="/logo.webp" alt="IMGCompressor.shop – Free Online Image Compressor" width="137" height="60">
+    </a>
+    <button class="sh-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sh-nav">☰</button>
+    <nav class="sh-nav" id="sh-nav" aria-label="Main">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about.html">About Us</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/contact.html">Contact Us</a></li>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 <main>
 <section class="compressor-section">
 <h1 id="title">Compress Image to 50KB</h1>
-<p id="description">Many application forms, ID-photo uploaders and signup pages set a 50 KB upload limit. Choose your photo and this tool shrinks it to 50 KB or less, lowering quality first and reducing dimensions only when it has to. Everything runs in your browser, so your image is never uploaded.</p>
+<p id="description">Many application forms, ID-photo uploaders and signup pages set a 50 KB upload limit. Pick your image and this tool finds the highest quality that still fits under 50 KB. Everything runs in your browser, so your image is never uploaded.</p>
 <form id="compressForm">
 <label for="imageInput">Choose an image to compress (JPG, PNG or WebP):</label>
 <input type="file" id="imageInput" accept="image/jpeg,image/png,image/webp" required>
@@ -154,7 +168,7 @@ nav ul{transition:all .3s ease-in-out}
 <section class="how-to-use">
 <h2>How to Compress an Image to 50KB</h2>
 <ol><li>Choose your JPG, PNG or WebP file.</li><li>Leave the target at 50 KB, or change it.</li><li>Click <strong>Compress to 50KB</strong>.</li><li>Download the result.</li></ol>
-<p>Good for:</p><ul><li>Profile and ID photos for application forms</li><li>Signature and document scans</li><li>Small thumbnails for emails and chat</li></ul>
+<p>Good for:</p><ul><li>Online application forms and exam portals</li><li>ID and passport-style photo uploads</li><li>Profile pictures and avatars</li></ul>
 </section>
 <section class="home-blog">
 <h2>Other Sizes</h2>
@@ -163,7 +177,7 @@ nav ul{transition:all .3s ease-in-out}
 </section>
 <section class="faq-section">
 <h2 class="faq-title">Frequently Asked Questions</h2>
-<div class="faq-item"><button class="faq-question" type="button">Will my photo look bad at 50 KB?<span class="faq-icon">+</span></button><div class="faq-answer"><p>A 50 KB target is small, so large photos are usually scaled down as well as compressed. Small portraits and signatures stay clear; detailed full-size photos lose fine detail.</p></div></div>
+<div class="faq-item"><button class="faq-question" type="button">Is 50 KB enough for a good photo?<span class="faq-icon">+</span></button><div class="faq-answer"><p>For small web images, profile pictures and ID-style photos, 50 KB can look fine on screen at a modest size, often around 600–800 px wide. It is not enough to preserve a full-resolution camera photo, and detailed images may look softer.</p></div></div>
 <div class="faq-item"><button class="faq-question" type="button">Are my images uploaded to a server?<span class="faq-icon">+</span></button><div class="faq-answer"><p>No. Compression happens in your browser, so your images never leave your device.</p></div></div>
 <div class="faq-item"><button class="faq-question" type="button">Which formats are supported?<span class="faq-icon">+</span></button><div class="faq-answer"><p>JPG, PNG and WebP. JPG stays JPG. PNG and WebP are saved as WebP to keep transparency, and in browsers that cannot create WebP they are saved as JPG with a white background.</p></div></div>
 <div class="faq-item"><button class="faq-question" type="button">What if my image is already smaller than the target?<span class="faq-icon">+</span></button><div class="faq-answer"><p>The tool tells you and keeps your original file unchanged.</p></div></div>
@@ -173,5 +187,22 @@ nav ul{transition:all .3s ease-in-out}
 <p style="color:#e0e0e0;">© 2026 ImgCompressor.shop · <a href="/about.html" style="color:#4da3ff;">About</a> | <a href="/contact.html" style="color:#4da3ff;">Contact</a> | <a href="/privacy.html" style="color:#4da3ff;">Privacy Policy</a></p>
 </footer>
 <script src="/target-size.js"></script>
+<script>
+(function () {
+  var header = document.querySelector('header.sh');
+  if (!header) return;
+  var btn = header.querySelector('.sh-toggle');
+  var nav = document.getElementById('sh-nav');
+  header.classList.add('sh-js');
+  function setOpen(open) {
+    nav.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  btn.addEventListener('click', function () { setOpen(!nav.classList.contains('is-open')); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  window.addEventListener('resize', function () { if (window.innerWidth > 768) setOpen(false); });
+})();
+</script>
 </body>
 </html>
