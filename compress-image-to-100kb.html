@@ -70,8 +70,6 @@
 }
 </script>
 <style>
-
-  
 #status{min-height:1.2em;color:#b00020}
 .home-blog{max-width:900px;margin:60px auto;padding:25px;background:#fff;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,.05)}
 .home-blog h2{color:#000;margin-bottom:15px}
@@ -91,11 +89,13 @@
 .faq-icon{font-size:20px;transition:transform .3s ease}
 .faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease;background:#fff}
 .faq-answer p{padding:15px;margin:0;color:#333;line-height:1.6}
-.faq-item.active .faq-answer{max-height:200px}
+.faq-item.active .faq-answer{max-height:400px}
 .faq-item.active .faq-icon{transform:rotate(45deg)}
 .footer-language{margin-top:15px;text-align:center}
 .footer-language label{margin-right:8px;font-size:14px;color:#ccc}
 .footer-language select{padding:6px 10px;border-radius:6px;border:1px solid #555;background:#111;color:#fff;cursor:pointer}
+
+/* ===== Header (matches homepage and blog) ===== */
 header.sh { background:#fff; border-bottom:1px solid #e2e5e9; position:sticky; top:0; z-index:100; padding:0; margin:0; box-shadow:none; }
 header.sh .sh-inner { max-width:1000px; margin:0 auto; padding:12px 20px; display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:16px; position:relative; }
 header.sh .sh-logo { display:block; flex-shrink:0; }
@@ -120,13 +120,13 @@ header.sh .sh-toggle:focus-visible, header.sh .sh-nav a:focus-visible, header.sh
 <body>
 <header class="sh">
   <div class="sh-inner">
-    <a class="sh-logo" href="/index.html">
+    <a class="sh-logo" href="/">
       <img src="/logo.webp" alt="IMGCompressor.shop – Free Online Image Compressor" width="137" height="60">
     </a>
     <button class="sh-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sh-nav">☰</button>
     <nav class="sh-nav" id="sh-nav" aria-label="Main">
       <ul>
-        <li><a href="/index.html">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="/about.html">About Us</a></li>
         <li><a href="/blog/">Blog</a></li>
         <li><a href="/contact.html">Contact Us</a></li>
@@ -187,7 +187,7 @@ header.sh .sh-toggle:focus-visible, header.sh .sh-nav a:focus-visible, header.sh
 <p style="color:#e0e0e0;">© 2026 ImgCompressor.shop · <a href="/about.html" style="color:#4da3ff;">About</a> | <a href="/contact.html" style="color:#4da3ff;">Contact</a> | <a href="/privacy.html" style="color:#4da3ff;">Privacy Policy</a></p>
 </footer>
 <script src="/target-size.js"></script>
- <script>
+<script>
 (function () {
   var header = document.querySelector('header.sh');
   if (!header) return;
