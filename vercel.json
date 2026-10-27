@@ -13,3 +13,8 @@
     { "source": "/blog/how-image-compression-improves-seo", "destination": "/blog/how-image-compression-improves-seo.html" }
   ]
 }
+{
+  "redirects": [
+    { "source": "/About%20Us", "destination": "/about.html", "permanent": true }
+  ]
+}
