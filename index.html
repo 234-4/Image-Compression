@@ -456,6 +456,7 @@ body > header.site-header .nav-toggle { display:none; }
       <label for="compressionRange">Quality: <span id="compressionValue">70</span>%</label>
       <input type="range" id="compressionRange" min="10" max="100" value="70">
       <button type="submit" id="compressBtn">Compress</button>
+        <button type="button" id="resetBtn">Reset</button>
       <p id="status" role="status" aria-live="polite"></p>
     </form>
  
@@ -646,6 +647,7 @@ body > header.site-header .nav-toggle { display:none; }
 </footer>
  
 <script src="/script.js"></script>
+    <script src="/tool-reset.js"></script>
 <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js').catch(function () {});
