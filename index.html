@@ -14,6 +14,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/footer.css">
  
 <meta property="og:url" content="https://www.imgcompressor.shop/">
 <meta property="og:type" content="website">
@@ -171,144 +172,7 @@ window.addEventListener('DOMContentLoaded', function() {
   font-weight: 600;
   text-decoration: none;
 }
-/* ==========================================================================
-   footer.css — styles for the new footer only (everything is scoped to .site-footer)
-   White version. Load it in <head>, after your other stylesheets.
-   ========================================================================== */
 
-.site-footer {
-  background: #fff;
-  color: #333;
-  border-top: 1px solid #e2e5e9;
-  font-size: 14px;
-  line-height: 1.6;
-  text-align: left;
-}
-.site-footer .footer-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 48px 20px 24px;
-  box-sizing: border-box;
-}
-
-/* ---------- Top: brand + three link columns ---------- */
-.site-footer .footer-top {
-  display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr 1fr;
-  gap: 40px;
-  padding-bottom: 36px;
-  border-bottom: 1px solid #e2e5e9;
-}
-
-.site-footer .footer-logo {
-  display: inline-block;
-  line-height: 0;
-}
-.site-footer .footer-logo img {
-  height: 40px;
-  width: auto;
-  display: block;
-}
-.site-footer .footer-tagline {
-  margin: 14px 0 20px;
-  max-width: 34ch;
-  color: #5f6368;
-}
-.site-footer .footer-ph-text {
-  margin: 0 0 8px;
-  color: #333;
-}
-.site-footer .footer-brand a img[alt*="Product Hunt"] {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-/* ---------- Link columns ---------- */
-.site-footer .footer-heading {
-  margin: 0 0 14px;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #111;
-}
-.site-footer .footer-col ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.site-footer .footer-col li {
-  margin: 0 0 10px;
-}
-.site-footer .footer-col a {
-  color: #0b57d0;
-  text-decoration: none;
-}
-.site-footer .footer-col a:hover {
-  color: #2e7d32;
-  text-decoration: underline;
-}
-.site-footer a:focus-visible,
-.site-footer select:focus-visible {
-  outline: 3px solid #81c784;
-  outline-offset: 2px;
-}
-
-/* ---------- Bottom bar ---------- */
-.site-footer .footer-bottom {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px 24px;
-  padding-top: 20px;
-}
-.site-footer .footer-copy {
-  margin: 0;
-  color: #5f6368;
-}
-.site-footer .footer-language {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0;
-  text-align: left;
-}
-.site-footer .footer-language label {
-  margin: 0;
-  font-size: 14px;
-  color: #333;
-}
-.site-footer .footer-language select {
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: 1px solid #c9ced4;
-  background: #fff;
-  color: #222;
-  cursor: pointer;
-}
-
-/* ---------- Responsive ---------- */
-@media (max-width: 860px) {
-  .site-footer .footer-top {
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-  }
-  .site-footer .footer-brand {
-    grid-column: 1 / -1;
-  }
-}
-@media (max-width: 480px) {
-  .site-footer .footer-inner {
-    padding: 36px 16px 20px;
-  }
-  .site-footer .footer-top {
-    grid-template-columns: 1fr;
-  }
-  .site-footer .footer-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
  /* ===== Header (matches blog pages) ===== */
 body > header.site-header { background:#fff; border-bottom:1px solid #e2e5e9; position:sticky; top:0; z-index:100; padding:0; box-shadow:none; }
 body > header.site-header nav { max-width:1000px; margin:0 auto; padding:12px 20px; display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:16px; position:relative; background:transparent; }
@@ -785,7 +649,7 @@ body > header.site-header .nav-toggle { display:none; }
       </div>
 
       <!-- Tools -->
-      <nav class="footer-col" aria-label="Tools">
+      <div class="footer-col" role="navigation" aria-label="Tools">
         <h2 class="footer-heading">Tools</h2>
         <ul>
           <li><a href="/index.html">Image Compressor</a></li>
@@ -793,10 +657,10 @@ body > header.site-header .nav-toggle { display:none; }
           <li><a href="/compress-image-to-100kb.html">Compress image to 100KB</a></li>
           <li><a href="/compress-image-to-200kb.html">Compress image to 200KB</a></li>
         </ul>
-      </nav>
+      </div>
 
       <!-- Resources -->
-      <nav class="footer-col" aria-label="Resources">
+      <div class="footer-col" role="navigation" aria-label="Resources">
         <h2 class="footer-heading">Resources</h2>
         <ul>
           <li><a href="/blog/">Blog</a></li>
@@ -804,17 +668,17 @@ body > header.site-header .nav-toggle { display:none; }
           <li><a href="/blog/why-is-my-photo-blurry-after-compressing.html">Fix blurry photos</a></li>
           <li><a href="/index.html#how-to-use">How to use</a></li>
         </ul>
-      </nav>
+      </div>
 
       <!-- Company -->
-      <nav class="footer-col" aria-label="Company">
+      <div class="footer-col" role="navigation" aria-label="Company">
         <h2 class="footer-heading">Company</h2>
         <ul>
           <li><a href="/about.html">About Us</a></li>
           <li><a href="/contact.html">Contact Us</a></li>
           <li><a href="/privacy.html">Privacy Policy</a></li>
         </ul>
-      </nav>
+      </div>
 
     </div>
 
