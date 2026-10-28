@@ -635,29 +635,88 @@ body > header.site-header .nav-toggle { display:none; }
     <a href="/compress-image-to-200kb.html">Compress image to 200KB</a>
   </p>
 </section>
-<footer style="background:#000;padding:20px;text-align:center;font-size:14px;">
-  <p style="color:#e0e0e0;">Check it out on Product Hunt</p>
-  <a href="https://www.producthunt.com/products/imgcompressor-shop?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-imgcompressor-shop" target="_blank" rel="noopener noreferrer"><img alt="ImgCompressor.shop on Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1129953&amp;theme=light&amp;t=1776869780535"></a>
-  <div class="footer-language">
-    <label for="languageSelector">Language:</label>
-    <select id="languageSelector">
-      <option value="en">English</option>
-      <option value="es">Español</option>
-      <option value="fr">Français</option>
-      <option value="de">Deutsch</option>
-      <option value="ar">العربية</option>
-      <option value="ur">اردو</option>
-    </select>
+<!-- ==========================================================================
+     footer.html
+     EDIT 1 (in <head>): add after your other stylesheet links:
+         <link rel="stylesheet" href="/footer.css">
+
+     EDIT 2: replace your whole existing <footer style="background:#000;..."> ... </footer>
+     with the block below.
+
+     Kept from the old footer: Product Hunt badge + text, #languageSelector (same id and
+     options), About / Contact / Privacy links, copyright line, tagline.
+     Added: logo, Tools column, Resources column, Company column.
+     ========================================================================== -->
+
+<footer class="site-footer">
+  <div class="footer-inner">
+
+    <div class="footer-top">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="/index.html" class="footer-logo">
+          <img src="/logo.webp" alt="IMGCompressor.shop – Free Online Image Compressor" width="137" height="60" loading="lazy">
+        </a>
+        <p class="footer-tagline">Free online tools for image compression and optimization.</p>
+        <p class="footer-ph-text">Check it out on Product Hunt</p>
+        <a href="https://www.producthunt.com/products/imgcompressor-shop?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-imgcompressor-shop" target="_blank" rel="noopener noreferrer">
+          <img alt="ImgCompressor.shop on Product Hunt" width="250" height="54" loading="lazy" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1129953&amp;theme=light&amp;t=1776869780535">
+        </a>
+      </div>
+
+      <!-- Tools -->
+      <nav class="footer-col" aria-label="Tools">
+        <h2 class="footer-heading">Tools</h2>
+        <ul>
+          <li><a href="/index.html">Image Compressor</a></li>
+          <li><a href="/compress-image-to-50kb.html">Compress image to 50KB</a></li>
+          <li><a href="/compress-image-to-100kb.html">Compress image to 100KB</a></li>
+          <li><a href="/compress-image-to-200kb.html">Compress image to 200KB</a></li>
+        </ul>
+      </nav>
+
+      <!-- Resources -->
+      <nav class="footer-col" aria-label="Resources">
+        <h2 class="footer-heading">Resources</h2>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/blog/how-image-compression-improves-seo.html">Compression and SEO</a></li>
+          <li><a href="/blog/why-is-my-photo-blurry-after-compressing.html">Fix blurry photos</a></li>
+          <li><a href="/index.html#how-to-use">How to use</a></li>
+        </ul>
+      </nav>
+
+      <!-- Company -->
+      <nav class="footer-col" aria-label="Company">
+        <h2 class="footer-heading">Company</h2>
+        <ul>
+          <li><a href="/about.html">About Us</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 ImgCompressor.shop</p>
+      <div class="footer-language">
+        <label for="languageSelector">Language:</label>
+        <select id="languageSelector">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="ar">العربية</option>
+          <option value="ur">اردو</option>
+        </select>
+      </div>
+    </div>
+
   </div>
-  <p style="color:#e0e0e0;">
-    © 2026 ImgCompressor.shop ·
-    <a href="/about.html" style="color:#4da3ff;">About</a> |
-    <a href="/contact.html" style="color:#4da3ff;">Contact</a> |
-    <a href="/privacy.html" style="color:#4da3ff;">Privacy Policy</a>
-  </p>
-  <p style="color:#bdbdbd;">Free online tools for image compression and optimization.</p>
 </footer>
- 
 <script src="/script.js"></script>
     <script src="/tool-reset.js"></script>
 <script>
