@@ -10,6 +10,7 @@
 
   const say = (m) => { statusEl.textContent = m || ''; };
   const fmt = (b) => b < 1024 ? b + ' Bytes' : b < 1048576 ? (b / 1024).toFixed(1) + ' KB' : (b / 1048576).toFixed(2) + ' MB';
+  const pause = () => new Promise((r) => setTimeout(r, 20)); // lets the page repaint between heavy steps
 
   kbInput.addEventListener('input', () => { kbLabel.textContent = kbInput.value || '–'; });
 
@@ -35,6 +36,7 @@
     i.src = srcUrl;
   });
 
+  // JPG / WebP encoder (canvas, quality-based)
   function encode(scale, q, type, flat) {
     const c = document.createElement('canvas');
     c.width = Math.max(1, Math.round(img.naturalWidth * scale));
@@ -43,6 +45,43 @@
     if (flat) { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height); }
     ctx.drawImage(img, 0, 0, c.width, c.height);
     return new Promise((res) => c.toBlob(res, type, q)).then((b) => ({ blob: b, w: c.width, h: c.height }));
+  }
+
+  // PNG: draw once at a given scale, then encode with a chosen number of colors (UPNG quantizer)
+  function pngPixels(scale) {
+    const c = document.createElement('canvas');
+    c.width = Math.max(1, Math.round(img.naturalWidth * scale));
+    c.height = Math.max(1, Math.round(img.naturalHeight * scale));
+    const ctx = c.getContext('2d');
+    ctx.drawImage(img, 0, 0, c.width, c.height);
+    return { data: ctx.getImageData(0, 0, c.width, c.height).data, w: c.width, h: c.height };
+  }
+  function pngEncode(px, colors) {
+    const buf = UPNG.encode([px.data.buffer.slice(0)], px.w, px.h, colors);
+    return { blob: new Blob([buf], { type: 'image/png' }), w: px.w, h: px.h };
+  }
+
+  async function compressPng(target) {
+    // Try 16 colors first at each size; if even that is too big, shrink the image and retry.
+    const steps = [256, 128, 64, 32];
+    let scale = 1;
+    for (let n = 0; n < 14; n++) {
+      say(scale === 1 ? 'Compressing PNG…' : `Compressing PNG (resizing to ${Math.round(scale * 100)}%)…`);
+      await pause();
+      const px = pngPixels(scale);
+      const smallest = pngEncode(px, 16);
+      if (smallest.blob.size <= target) {
+        // It fits. Now find the highest color count that still fits.
+        for (const colors of steps) {
+          await pause();
+          const r = pngEncode(px, colors);
+          if (r.blob.size <= target) return r;
+        }
+        return smallest;
+      }
+      scale *= 0.85;
+    }
+    return null;
   }
 
   function show(blob, note) {
@@ -69,6 +108,25 @@
 
     btn.disabled = true; say('Compressing…');
     try {
+      // ---- PNG stays PNG ----
+      if (file.type === 'image/png') {
+        if (!(window.UPNG && window.pako)) {
+          say('The PNG compressor did not load. Please refresh the page and try again.');
+        } else {
+          const best = await compressPng(target);
+          if (!best) { say(`Could not reach ${kb} KB. Try a higher target.`); }
+          else {
+            say('');
+            let note = `Compressed to ${fmt(best.blob.size)} (${best.w} × ${best.h} px), under your ${kb} KB target. Saved as PNG.`;
+            if (best.w < img.naturalWidth) note += ' Dimensions were reduced to reach the target.';
+            show(best.blob, note);
+          }
+        }
+        btn.disabled = false;
+        return;
+      }
+
+      // ---- JPG and WebP (unchanged) ----
       const jpeg = file.type === 'image/jpeg' || !webpOk;
       const type = jpeg ? 'image/jpeg' : 'image/webp';
       const flat = jpeg && file.type !== 'image/jpeg'; // JPEG has no transparency
