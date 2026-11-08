@@ -87,44 +87,67 @@
       canvas.height = img.naturalHeight;
       canvas.getContext('2d').drawImage(img, 0, 0);
 
-      // JPEG stays JPEG; PNG/WebP become WebP so transparency is preserved.
-      const outType = originalFile.type === 'image/jpeg' ? 'image/jpeg' : 'image/webp';
+      // Keep the original format: JPG stays JPG, PNG stays PNG, WebP stays WebP.
+      const outType = originalFile.type;
 
-      canvas.toBlob((blob) => {
-        compressBtn.disabled = false;
-        if (!blob) { say('Compression failed. The image may be too large for your browser.'); return; }
+      // PNG: canvas ignores the quality value, so reduce colors with UPNG instead.
+      if (outType === 'image/png' && window.UPNG && window.pako) {
+        say('Compressing PNG…');
+        setTimeout(() => {
+          try {
+            const { width, height } = canvas;
+            const data = canvas.getContext('2d').getImageData(0, 0, width, height).data;
+            // quality 10–99% -> ~26–253 colors; 100% = lossless
+            const colors = quality >= 1 ? 0 : Math.max(16, Math.round(quality * 256));
+            const png = UPNG.encode([data.buffer], width, height, colors);
+            say('');
+            finish(new Blob([png], { type: 'image/png' }), outType);
+          } catch (err) {
+            compressBtn.disabled = false;
+            say('Compression failed. Try a smaller image.');
+          }
+        }, 30);
+        return;
+      }
 
-        const unsupported = blob.type !== outType; // e.g. Safari cannot encode WebP
-        const keepOriginal = unsupported || blob.size >= originalFile.size;
-        const result = keepOriginal ? originalFile : blob;
-
-        if (resultUrl) URL.revokeObjectURL(resultUrl);
-        resultUrl = URL.createObjectURL(result);
-
-        resultOriginalImage.src = previewUrl;
-        resultOriginalSize.textContent = formatFileSize(originalFile.size);
-        compressedImage.src = resultUrl;
-        compressedSize.textContent = formatFileSize(result.size);
-
-        const ext = result.type.split('/')[1].replace('jpeg', 'jpg');
-        downloadBtn.href = resultUrl;
-        downloadBtn.download = originalFile.name.replace(/\.[^.]+$/, '') + '-compressed.' + ext;
-
-        if (unsupported) {
-          ratioDisplay.textContent = "Your browser can't encode this format, so your original is kept.";
-        } else if (keepOriginal) {
-          ratioDisplay.textContent = 'This image is already well optimized, so your original is kept.';
-        } else {
-          const pct = ((originalFile.size - result.size) / originalFile.size * 100).toFixed(1);
-          ratioDisplay.textContent = `Size reduced by ${pct}% (saved as ${ext.toUpperCase()})`;
-        }
-        ratioDisplay.style.display = 'block';
-        outputContainer.style.display = 'block';
-      }, outType, quality);
+      // JPG, WebP (and PNG fallback if UPNG/pako did not load)
+      canvas.toBlob((blob) => finish(blob, outType), outType, quality);
     } catch (err) {
       compressBtn.disabled = false;
       say('Compression failed. Try a smaller image.');
     }
+  }
+
+  function finish(blob, outType) {
+    compressBtn.disabled = false;
+    if (!blob) { say('Compression failed. The image may be too large for your browser.'); return; }
+
+    const unsupported = blob.type !== outType; // e.g. Safari cannot encode WebP
+    const keepOriginal = unsupported || blob.size >= originalFile.size;
+    const result = keepOriginal ? originalFile : blob;
+
+    if (resultUrl) URL.revokeObjectURL(resultUrl);
+    resultUrl = URL.createObjectURL(result);
+
+    resultOriginalImage.src = previewUrl;
+    resultOriginalSize.textContent = formatFileSize(originalFile.size);
+    compressedImage.src = resultUrl;
+    compressedSize.textContent = formatFileSize(result.size);
+
+    const ext = result.type.split('/')[1].replace('jpeg', 'jpg');
+    downloadBtn.href = resultUrl;
+    downloadBtn.download = originalFile.name.replace(/\.[^.]+$/, '') + '-compressed.' + ext;
+
+    if (unsupported) {
+      ratioDisplay.textContent = "Your browser can't encode this format, so your original is kept.";
+    } else if (keepOriginal) {
+      ratioDisplay.textContent = 'This image is already well optimized, so your original is kept.';
+    } else {
+      const pct = ((originalFile.size - result.size) / originalFile.size * 100).toFixed(1);
+      ratioDisplay.textContent = `Size reduced by ${pct}% (saved as ${ext.toUpperCase()})`;
+    }
+    ratioDisplay.style.display = 'block';
+    outputContainer.style.display = 'block';
   }
 
   // ---- Language switcher (UI strings only) ----
