@@ -189,7 +189,7 @@ header.sh .sh-toggle{display:none}
 </ul>
 
 <h2>How our compressor treats each format</h2>
-<p>A JPG stays a JPG. A PNG is saved as WebP so that transparency is kept while the file shrinks. If a browser cannot create WebP, the image is saved as a JPG with a white background instead. If your upload form only takes JPG, start from a JPG, or convert your PNG first. <a href="/blog/how-to-reduce-image-size-for-online-forms.html">Our guide to compressing images for online forms</a> explains this in more detail.</p>
+<p>On our main compressor, a JPG stays a JPG, a PNG stays a PNG with its transparency kept, and a WebP stays a WebP. On the exact-size pages (50KB, 100KB and 200KB), a PNG that cannot reach the target at full size is scaled down slightly. If your upload form only takes JPG, start from a JPG, or convert your PNG first. <a href="/blog/how-to-reduce-image-size-for-online-forms.html">Our guide to compressing images for online forms</a> explains this in more detail.</p>
 
 <h2>Common mistakes</h2>
 <ul>
