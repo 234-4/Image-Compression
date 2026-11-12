@@ -414,6 +414,13 @@ body > header.site-header .nav-toggle { display:none; }
   cursor: pointer;
 }
 #resetBtn:hover { background: #f1f8f1; }
+
+  .guides-groups { display: grid; gap: 22px 32px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin: 18px 0 8px; }
+  .guides-groups h3 { margin: 0 0 8px; font-size: 1.05rem; color: #111; }
+  .guides-groups ul { margin: 0; padding-left: 1.2em; }
+  .guides-groups li { margin-bottom: 7px; line-height: 1.5; }
+  .guides-groups a { color: #0033ff; text-decoration: none; }
+  .guides-groups a:hover { text-decoration: underline; }
 </style>
     
 </head>
@@ -535,14 +542,52 @@ body > header.site-header .nav-toggle { display:none; }
     <li><strong>Start from the original photo.</strong> Compressing an image that was already compressed removes more detail each time.</li>
   </ul>
 </section> 
-<section class="home-blog">
-    <h2>Image Compression Guides</h2>
-    <p>Learn how to shrink image files without making them look worse, and how smaller images can help your pages load faster.</p>
-    <ul>
-      <li><a href="/blog/how-image-compression-improves-seo.html">How Image Compression Helps Page Speed and SEO</a></li>
-      <li><a href="/blog/why-is-my-photo-blurry-after-compressing.html">Why Does My Photo Look Blurry After Compressing? 6 Fixes</a></li>
-    </ul>
-    <a href="/blog/" class="read-more">View All Guides →</a>
+section class="home-blog" id="guides">
+  <h2>Image Compression Guides</h2>
+  <p>Practical guides on making images smaller, choosing the right format and fixing common upload problems.</p>
+ 
+  <div class="guides-groups">
+ 
+    <div>
+      <h3>Forms, email and size limits</h3>
+      <ul>
+        <li><a href="/blog/how-to-reduce-image-size-for-online-forms.html">How to Reduce Image Size for Online Forms (50KB, 100KB, 200KB)</a></li>
+        <li><a href="/blog/photos-too-large-to-email.html">Why Are My Photos Too Large to Email?</a></li>
+        <li><a href="/blog/how-to-make-photos-smaller-in-mb.html">How to Make Photos Smaller in MB</a></li>
+      </ul>
+    </div>
+ 
+    <div>
+      <h3>Formats and quality</h3>
+      <ul>
+        <li><a href="/blog/jpg-vs-png-vs-webp.html">JPG vs PNG vs WebP: Which Image Format Should You Use?</a></li>
+        <li><a href="/blog/jpg-image-compressor-guide.html">JPG Image Compressor: How to Compress JPG Files Online</a></li>
+        <li><a href="/blog/compress-transparent-png.html">How to Compress a Transparent PNG</a></li>
+        <li><a href="/blog/why-is-my-photo-blurry-after-compressing.html">Why Does My Photo Look Blurry After Compressing?</a></li>
+      </ul>
+    </div>
+ 
+    <div>
+      <h3>Phone photos</h3>
+      <ul>
+        <li><a href="/blog/heic-to-jpg-iphone-photos.html">HEIC to JPG: Fix “File Format Not Supported” on iPhone</a></li>
+        <li><a href="/blog/free-up-phone-storage-photos.html">How to Make Phone Photos Smaller and Free Up Storage</a></li>
+      </ul>
+    </div>
+ 
+    <div>
+      <h3>Websites, SEO and privacy</h3>
+      <ul>
+        <li><a href="/blog/how-image-compression-improves-seo.html">How Image Compression Helps Page Speed and SEO</a></li>
+        <li><a href="/blog/ideal-image-size-for-website.html">What Is the Ideal Image Size for a Website?</a></li>
+        <li><a href="/blog/reduce-logo-file-size.html">How to Reduce Logo File Size Without Losing Transparency</a></li>
+        <li><a href="/blog/are-online-image-compressors-safe.html">Are Online Image Compressors Safe?</a></li>
+      </ul>
+    </div>
+ 
+  </div>
+ 
+  <a href="/blog/" class="read-more">View All Guides →</a>
 </section>
  
   <section class="seo-article">
