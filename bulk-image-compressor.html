@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bulk Image Compressor – Compress Multiple Images at Once</title>
+<meta name="description" content="Compress up to 20 JPG, PNG and WebP images at once, free. Runs in your browser, so your photos are never uploaded. Download them one by one or as a ZIP.">
+<link rel="canonical" href="https://www.imgcompressor.shop/bulk-image-compressor.html">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="stylesheet" href="/styles.css">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.imgcompressor.shop/bulk-image-compressor.html">
+<meta property="og:title" content="Bulk Image Compressor – Compress Multiple Images at Once">
+<meta property="og:description" content="Compress up to 20 images at once in your browser. Free, fast and private.">
+<meta property="og:image" content="https://www.imgcompressor.shop/preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Bulk Image Compressor",
+ "url": "https://www.imgcompressor.shop/bulk-image-compressor.html",
+ "applicationCategory": "MultimediaApplication",
+ "operatingSystem": "All",
+ "featureList": ["Compress up to 20 images at once", "JPG, PNG and WebP supported", "Download individually or as a ZIP", "Runs in your browser, nothing is uploaded"],
+ "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  { "@type": "Question", "name": "How many images can I compress at once?", "acceptedAnswer": { "@type": "Answer", "text": "Up to 20 images at a time. Very large photos, or an older phone, may need smaller batches." } },
+  { "@type": "Question", "name": "Are my images uploaded to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. Compression happens in your browser, so your images never leave your device." } },
+  { "@type": "Question", "name": "Which formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "JPG, PNG and WebP. Each image keeps its own format: JPG stays JPG, PNG stays PNG and WebP stays WebP." } },
+  { "@type": "Question", "name": "Can I download all the compressed images at once?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. After compressing, click Download all as ZIP to get every file in one archive, or download each image separately." } },
+  { "@type": "Question", "name": "Why was an image not made smaller?", "acceptedAnswer": { "@type": "Answer", "text": "If the compressed version would not be smaller than the original, your original file is kept. This usually means the image was already well optimized." } }
+ ]
+}
+</script>
+<style>
+[hidden]{display:none !important}
+#status{min-height:1.2em}
+.bk-tool{max-width:900px;margin:30px auto;padding:24px 20px;background:#fff;border-radius:10px;box-shadow:0 0 12px rgba(0,0,0,.06)}
+.bk-tool h1{margin:0 0 8px;font-size:2rem;line-height:1.25;color:#333}
+.bk-tool .bk-intro{margin:0 0 20px;color:#555;line-height:1.6}
+.bk-drop{border:2px dashed #b9c8b9;border-radius:10px;padding:22px;text-align:center;background:#f9fbf9;margin-bottom:18px}
+.bk-drop.is-drag{border-color:#4CAF50;background:#f1f8f1}
+.bk-drop p{margin:8px 0 0;color:#666;font-size:.95rem}
+.bk-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-bottom:14px}
+.bk-controls label{font-weight:600}
+.bk-controls input[type=range]{flex:1 1 220px;min-width:160px}
+.bk-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.bk-btn{padding:10px 20px;font:inherit;font-weight:600;border-radius:6px;cursor:pointer;border:1px solid #4CAF50;background:#4CAF50;color:#fff}
+.bk-btn:hover{background:#388E3C}
+.bk-btn:disabled{opacity:.55;cursor:not-allowed}
+.bk-btn--ghost{background:#fff;color:#2e7d32}
+.bk-btn--ghost:hover{background:#f1f8f1}
+.bk-btn:focus-visible,.bk-drop input:focus-visible,a:focus-visible{outline:3px solid #1b5e20;outline-offset:2px}
+#bulkStatus{margin:6px 0 12px;color:#444;min-height:1.3em}
+#bulkProgressWrap{margin:0 0 12px}
+#bulkProgress{width:100%;height:14px}
+#bulkSummary{margin:10px 0;font-weight:600;color:#2e7d32}
+.bk-table-wrap{overflow-x:auto;margin-top:8px}
+.bk-table{width:100%;border-collapse:collapse;font-size:.95rem}
+.bk-table th,.bk-table td{border-bottom:1px solid #e2e5e9;padding:10px 8px;text-align:left;vertical-align:top;word-break:break-word}
+.bk-table thead th{background:#f5f8f5}
+.bk-table a{color:#2e7d32;font-weight:600}
+@media (max-width:640px){
+  .bk-table thead{display:none}
+  .bk-table,.bk-table tbody,.bk-table tr,.bk-table td{display:block;width:100%}
+  .bk-table tr{border:1px solid #e2e5e9;border-radius:8px;margin-bottom:12px;padding:6px 10px}
+  .bk-table td{border:0;padding:5px 0;display:flex;gap:10px;justify-content:space-between}
+  .bk-table td::before{font-weight:600;color:#555}
+  .bk-table td[data-label="name"]::before{content:"File"}
+  .bk-table td[data-label="original"]::before{content:"Original"}
+  .bk-table td[data-label="new"]::before{content:"New size"}
+  .bk-table td[data-label="saved"]::before{content:"Saved"}
+  .bk-table td[data-label="status"]::before{content:"Status"}
+}
+.home-blog{max-width:900px;margin:60px auto;padding:25px;background:#fff;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,.05)}
+.home-blog h2{color:#000;margin-bottom:15px}
+.home-blog p{color:#333;line-height:1.7;margin-bottom:12px}
+.home-blog .read-more{display:inline-block;margin-top:10px;color:#0033ff;font-weight:600;text-decoration:none}
+.seo-article{max-width:900px;margin:40px auto;padding:20px;line-height:1.7;font-family:Arial,Helvetica,sans-serif;color:#222}
+.seo-article h2{font-size:22px;margin:30px 0 10px;color:#111}
+.seo-article p{font-size:16px;margin-bottom:15px}
+.seo-article ul,.seo-article ol{margin:0 0 15px 20px}
+.seo-article li{margin-bottom:8px}
+.faq-section{max-width:800px;margin:60px auto;padding:20px;font-family:Arial,sans-serif}
+.faq-title{text-align:center;font-size:28px;margin-bottom:30px;color:#000}
+.faq-item{border-bottom:1px solid #ddd;margin-bottom:10px}
+.faq-question{width:100%;background:#f9f9f9;color:#000;padding:16px;font-size:16px;font-weight:600;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-question:hover{background:#eee}
+.faq-icon{font-size:20px;transition:transform .3s ease}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease;background:#fff}
+.faq-answer p{padding:15px;margin:0;color:#333;line-height:1.6}
+.faq-item.active .faq-answer{max-height:400px}
+.faq-item.active .faq-icon{transform:rotate(45deg)}
+
+/* ===== Header (matches homepage and blog) ===== */
+header.sh { background:#fff; border-bottom:1px solid #e2e5e9; position:sticky; top:0; z-index:100; padding:0; margin:0; box-shadow:none; }
+header.sh .sh-inner { max-width:1000px; margin:0 auto; padding:12px 20px; display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:16px; position:relative; }
+header.sh .sh-logo { display:block; flex-shrink:0; }
+header.sh .sh-logo img { height:40px; width:auto; display:block; }
+header.sh .sh-nav { position:static; background:none; padding:0; }
+header.sh .sh-nav ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:row; flex-wrap:wrap; gap:20px; position:static; background:none; box-shadow:none; width:auto; }
+header.sh .sh-nav li { margin:0; padding:0; width:auto; text-align:left; }
+header.sh .sh-nav a { color:#222; text-decoration:none; font-weight:500; font-size:1rem; padding:0; border:0; background:none; display:inline; }
+header.sh .sh-nav a:hover, header.sh .sh-nav a.is-active { color:#388E3C; background:none; }
+header.sh .sh-toggle { display:none; }
+header.sh .sh-toggle:focus-visible, header.sh .sh-nav a:focus-visible, header.sh .sh-logo:focus-visible { outline:3px solid #1b5e20; outline-offset:2px; }
+@media (max-width:768px) {
+  header.sh.sh-js .sh-toggle { display:block; position:static; background:none; border:1px solid #e2e5e9; border-radius:6px; color:#222; font-size:22px; line-height:1; padding:8px 12px; cursor:pointer; }
+  header.sh.sh-js .sh-nav { display:none; position:absolute; top:100%; left:0; right:0; background:#fff; border-bottom:1px solid #e2e5e9; padding:8px 20px 16px; z-index:999; }
+  header.sh.sh-js .sh-nav.is-open { display:block; }
+  header.sh.sh-js .sh-nav ul { flex-direction:column; gap:0; }
+  header.sh.sh-js .sh-nav a { display:block; padding:12px 0; border-bottom:1px solid #f0f2f0; }
+  header.sh.sh-js .sh-nav li:last-child a { border-bottom:0; }
+}
+</style>
+</head>
+<body>
+<header class="sh">
+  <div class="sh-inner">
+    <a class="sh-logo" href="/">
+      <img src="/logo.webp" alt="IMGCompressor.shop – Free Online Image Compressor" width="137" height="60">
+    </a>
+    <button class="sh-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sh-nav">☰</button>
+    <nav class="sh-nav" id="sh-nav" aria-label="Main">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about.html">About Us</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/contact.html">Contact Us</a></li>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="bk-tool">
+  <h1>Bulk Image Compressor</h1>
+  <p class="bk-intro">Compress up to 20 JPG, PNG or WebP images at once. Choose one quality level, then download each file or all of them as a ZIP. Everything runs in your browser; nothing is uploaded.</p>
+
+  <div class="bk-drop" id="bulkDrop">
+    <label for="bulkInput"><strong>Choose images to compress</strong> (JPG, PNG or WebP):</label><br>
+    <input type="file" id="bulkInput" accept="image/jpeg,image/png,image/webp" multiple>
+    <p>or drag and drop images here (up to 20 at a time)</p>
+  </div>
+
+  <div class="bk-controls">
+    <label for="bulkRange">Quality: <span id="bulkRangeValue">70</span>%</label>
+    <input type="range" id="bulkRange" min="10" max="100" value="70">
+  </div>
+
+  <div class="bk-actions">
+    <button type="button" class="bk-btn" id="bulkCompressBtn" disabled>Compress all</button>
+    <button type="button" class="bk-btn bk-btn--ghost" id="bulkZipBtn" hidden>Download all as ZIP</button>
+    <button type="button" class="bk-btn bk-btn--ghost" id="bulkClearBtn" hidden>Clear all</button>
+  </div>
+
+  <p id="bulkStatus" role="status" aria-live="polite"></p>
+  <div id="bulkProgressWrap" hidden><progress id="bulkProgress" value="0" max="1" aria-label="Compression progress"></progress></div>
+  <p id="bulkSummary"></p>
+
+  <div id="bulkListWrap" class="bk-table-wrap" hidden>
+    <table class="bk-table">
+      <thead>
+        <tr>
+          <th scope="col">File</th>
+          <th scope="col">Original</th>
+          <th scope="col">New size</th>
+          <th scope="col">Saved</th>
+          <th scope="col">Status</th>
+          <th scope="col">Download</th>
+        </tr>
+      </thead>
+      <tbody id="bulkList"></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="seo-article">
+  <article>
+    <h2>How to Compress Multiple Images at Once</h2>
+    <ol>
+      <li>Click the file picker and select your images, or drag them onto the box. You can add up to 20.</li>
+      <li>Set the quality slider. It starts at 70%, a good balance for most photos.</li>
+      <li>Click <strong>Compress all</strong>. Each image is processed in turn and you can watch the progress.</li>
+      <li>Download images one by one, or click <strong>Download all as ZIP</strong> to get them together.</li>
+    </ol>
+
+    <h2>Good to Know</h2>
+    <ul>
+      <li><strong>Each image keeps its format.</strong> JPG stays JPG, PNG stays PNG (transparency is preserved) and WebP stays WebP.</li>
+      <li><strong>One setting for the whole batch.</strong> If one image looks too soft, raise the quality and compress again.</li>
+      <li><strong>Already optimized?</strong> If an image would not get smaller, your original is kept.</li>
+      <li><strong>Your files stay private.</strong> Compression happens on your device, so nothing is sent to a server.</li>
+      <li><strong>Large batches take longer.</strong> Big photos need more memory, so on a phone you may prefer smaller batches.</li>
+    </ul>
+    <p>Need an exact file size for a form? Use one of our size tools instead.</p>
+  </article>
+</section>
+
+<section class="home-blog">
+  <h2>Other Tools</h2>
+  <p>
+    <a href="/">Image compressor (one image)</a> ·
+    <a href="/compress-image-to-50kb.html">Compress image to 50KB</a> ·
+    <a href="/compress-image-to-100kb.html">Compress image to 100KB</a> ·
+    <a href="/compress-image-to-200kb.html">Compress image to 200KB</a>
+  </p>
+</section>
+
+<section class="faq-section">
+  <h2 class="faq-title">Frequently Asked Questions</h2>
+  <div class="faq-item"><button class="faq-question" type="button">How many images can I compress at once?<span class="faq-icon">+</span></button><div class="faq-answer"><p>Up to 20 images at a time. Very large photos, or an older phone, may need smaller batches.</p></div></div>
+  <div class="faq-item"><button class="faq-question" type="button">Are my images uploaded to a server?<span class="faq-icon">+</span></button><div class="faq-answer"><p>No. Compression happens in your browser, so your images never leave your device.</p></div></div>
+  <div class="faq-item"><button class="faq-question" type="button">Which formats are supported?<span class="faq-icon">+</span></button><div class="faq-answer"><p>JPG, PNG and WebP. Each image keeps its own format: JPG stays JPG, PNG stays PNG and WebP stays WebP.</p></div></div>
+  <div class="faq-item"><button class="faq-question" type="button">Can I download all the compressed images at once?<span class="faq-icon">+</span></button><div class="faq-answer"><p>Yes. After compressing, click Download all as ZIP to get every file in one archive, or download each image separately.</p></div></div>
+  <div class="faq-item"><button class="faq-question" type="button">Why was an image not made smaller?<span class="faq-icon">+</span></button><div class="faq-answer"><p>If the compressed version would not be smaller than the original, your original file is kept. This usually means the image was already well optimized.</p></div></div>
+</section>
+</main>
+
+<footer style="background:#000;padding:20px;text-align:center;font-size:14px;">
+<p style="color:#e0e0e0;">© 2026 ImgCompressor.shop · <a href="/about.html" style="color:#4da3ff;">About</a> | <a href="/contact.html" style="color:#4da3ff;">Contact</a> | <a href="/privacy.html" style="color:#4da3ff;">Privacy Policy</a></p>
+</footer>
+
+<script>
+(function () {
+  var header = document.querySelector('header.sh');
+  if (!header) return;
+  var btn = header.querySelector('.sh-toggle');
+  var nav = document.getElementById('sh-nav');
+  header.classList.add('sh-js');
+  function setOpen(open) {
+    nav.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  btn.addEventListener('click', function () { setOpen(!nav.classList.contains('is-open')); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  window.addEventListener('resize', function () { if (window.innerWidth > 768) setOpen(false); });
+})();
+</script>
+<script src="/pako.min.js"></script>
+<script src="/UPNG.js"></script>
+<script src="/bulk.js"></script>
+</body>
+</html>
