@@ -464,7 +464,29 @@ body > header.site-header .nav-toggle { display:none; }
           <div class="spec-item"><span class="spec-label">Format:</span> <span class="spec-value" id="originalFormat">-</span></div>
         </div>
       </div>
- 
+ <div class="resize-box">
+  <label class="resize-toggle"><input type="checkbox" id="resizeToggle"> Resize the image in pixels before compressing (optional)</label>
+  <div id="resizeFields" hidden>
+    <div class="resize-row">
+      <div>
+        <label for="resizeWidth">Width (px)</label>
+        <input type="number" id="resizeWidth" min="1" step="1" inputmode="numeric">
+      </div>
+      <div>
+        <label for="resizeHeight">Height (px)</label>
+        <input type="number" id="resizeHeight" min="1" step="1" inputmode="numeric">
+      </div>
+    </div>
+    <label class="resize-lock"><input type="checkbox" id="resizeLock" checked> Keep aspect ratio</label>
+    <div class="resize-presets">
+      Quick sizes:
+      <button type="button" class="resize-preset" data-pct="75">75%</button>
+      <button type="button" class="resize-preset" data-pct="50">50%</button>
+      <button type="button" class="resize-preset" data-pct="25">25%</button>
+    </div>
+    <p id="resizeNote" class="resize-note" role="status" aria-live="polite"></p>
+  </div>
+</div>
       <label for="compressionRange">Quality: <span id="compressionValue">70</span>%</label>
       <input type="range" id="compressionRange" min="10" max="100" value="70">
       <button type="submit" id="compressBtn">Compress</button>
