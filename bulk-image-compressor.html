@@ -22,7 +22,7 @@
  "url": "https://www.imgcompressor.shop/bulk-image-compressor.html",
  "applicationCategory": "MultimediaApplication",
  "operatingSystem": "All",
- "featureList": ["Compress up to 20 images at once", "JPG, PNG and WebP supported", "Download individually or as a ZIP", "Runs in your browser, nothing is uploaded"],
+ "featureList": ["Compress up to 20 images at once", "Optional resize to a maximum width", "JPG, PNG and WebP supported", "Download individually or as a ZIP", "Runs in your browser, nothing is uploaded"],
  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
 }
 </script>
@@ -35,6 +35,7 @@
   { "@type": "Question", "name": "Are my images uploaded to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. Compression happens in your browser, so your images never leave your device." } },
   { "@type": "Question", "name": "Which formats are supported?", "acceptedAnswer": { "@type": "Answer", "text": "JPG, PNG and WebP. Each image keeps its own format: JPG stays JPG, PNG stays PNG and WebP stays WebP." } },
   { "@type": "Question", "name": "Can I download all the compressed images at once?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. After compressing, click Download all as ZIP to get every file in one archive, or download each image separately." } },
+  { "@type": "Question", "name": "Can I resize images in bulk?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Enter a maximum width in pixels and every image wider than that is scaled down in proportion. Images that are already narrower are left at their original size." } },
   { "@type": "Question", "name": "Why was an image not made smaller?", "acceptedAnswer": { "@type": "Answer", "text": "If the compressed version would not be smaller than the original, your original file is kept. This usually means the image was already well optimized." } }
  ]
 }
@@ -50,6 +51,8 @@
 .bk-drop p{margin:8px 0 0;color:#666;font-size:.95rem}
 .bk-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-bottom:14px}
 .bk-controls label{font-weight:600}
+.bk-controls input[type=number]{width:150px;padding:8px;font:inherit;border:1px solid #c9d2c9;border-radius:6px}
+.bk-hint{color:#666;font-size:.9rem;flex:1 1 240px}
 .bk-controls input[type=range]{flex:1 1 220px;min-width:160px}
 .bk-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
 .bk-btn{padding:10px 20px;font:inherit;font-weight:600;border-radius:6px;cursor:pointer;border:1px solid #4CAF50;background:#4CAF50;color:#fff}
@@ -143,7 +146,7 @@ header.sh .sh-toggle:focus-visible, header.sh .sh-nav a:focus-visible, header.sh
 <main>
 <section class="bk-tool">
   <h1>Bulk Image Compressor</h1>
-  <p class="bk-intro">Compress up to 20 JPG, PNG or WebP images at once. Choose one quality level, then download each file or all of them as a ZIP. Everything runs in your browser; nothing is uploaded.</p>
+  <p class="bk-intro">Compress up to 20 JPG, PNG or WebP images at once. Choose one quality level, optionally set a maximum width in pixels, then download each file or all of them as a ZIP. Everything runs in your browser; nothing is uploaded.</p>
 
   <div class="bk-drop" id="bulkDrop">
     <label for="bulkInput"><strong>Choose images to compress</strong> (JPG, PNG or WebP):</label><br>
@@ -154,6 +157,11 @@ header.sh .sh-toggle:focus-visible, header.sh .sh-nav a:focus-visible, header.sh
   <div class="bk-controls">
     <label for="bulkRange">Quality: <span id="bulkRangeValue">70</span>%</label>
     <input type="range" id="bulkRange" min="10" max="100" value="70">
+  </div>
+  <div class="bk-controls">
+    <label for="bulkMaxWidth">Maximum width in pixels (optional):</label>
+    <input type="number" id="bulkMaxWidth" min="1" max="10000" step="1" placeholder="Original size" inputmode="numeric">
+    <span class="bk-hint">Wider images are scaled down to this width. Smaller images are left as they are.</span>
   </div>
 
   <div class="bk-actions">
@@ -196,6 +204,7 @@ header.sh .sh-toggle:focus-visible, header.sh .sh-nav a:focus-visible, header.sh
     <h2>Good to Know</h2>
     <ul>
       <li><strong>Each image keeps its format.</strong> JPG stays JPG, PNG stays PNG (transparency is preserved) and WebP stays WebP.</li>
+      <li><strong>Resize in bulk.</strong> Enter a maximum width, such as 1200, and every image wider than that is scaled down in proportion. Smaller images are not enlarged.</li>
       <li><strong>One setting for the whole batch.</strong> If one image looks too soft, raise the quality and compress again.</li>
       <li><strong>Already optimized?</strong> If an image would not get smaller, your original is kept.</li>
       <li><strong>Your files stay private.</strong> Compression happens on your device, so nothing is sent to a server.</li>
@@ -221,6 +230,7 @@ header.sh .sh-toggle:focus-visible, header.sh .sh-nav a:focus-visible, header.sh
   <div class="faq-item"><button class="faq-question" type="button">Are my images uploaded to a server?<span class="faq-icon">+</span></button><div class="faq-answer"><p>No. Compression happens in your browser, so your images never leave your device.</p></div></div>
   <div class="faq-item"><button class="faq-question" type="button">Which formats are supported?<span class="faq-icon">+</span></button><div class="faq-answer"><p>JPG, PNG and WebP. Each image keeps its own format: JPG stays JPG, PNG stays PNG and WebP stays WebP.</p></div></div>
   <div class="faq-item"><button class="faq-question" type="button">Can I download all the compressed images at once?<span class="faq-icon">+</span></button><div class="faq-answer"><p>Yes. After compressing, click Download all as ZIP to get every file in one archive, or download each image separately.</p></div></div>
+  <div class="faq-item"><button class="faq-question" type="button">Can I resize images in bulk?<span class="faq-icon">+</span></button><div class="faq-answer"><p>Yes. Enter a maximum width in pixels and every image wider than that is scaled down in proportion. Images that are already narrower are left at their original size.</p></div></div>
   <div class="faq-item"><button class="faq-question" type="button">Why was an image not made smaller?<span class="faq-icon">+</span></button><div class="faq-answer"><p>If the compressed version would not be smaller than the original, your original file is kept. This usually means the image was already well optimized.</p></div></div>
 </section>
 </main>
