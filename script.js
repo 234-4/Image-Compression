@@ -19,10 +19,20 @@
   const ratioDisplay = $('compressionRatioDisplay');
   const downloadBtn = $('downloadBtn');
 
+  // Optional resize controls (all null-safe, so the tool still works if they are missing)
+  const resizeToggle = $('resizeToggle');
+  const resizeFields = $('resizeFields');
+  const resizeWidth = $('resizeWidth');
+  const resizeHeight = $('resizeHeight');
+  const resizeLock = $('resizeLock');
+  const resizeNote = $('resizeNote');
+
   let originalImage = null;
   let originalFile = null;
   let previewUrl = null;
   let resultUrl = null;
+  let aspect = 1;            // original width / height
+  let lastDims = null;       // { w, h, resized } for the compression in progress
 
   const say = (msg) => { statusEl.textContent = msg || ''; };
 
@@ -39,6 +49,94 @@
     imagePreview.style.display = 'none';
     originalImage = null;
     say('');
+  }
+
+  // ---------- optional resize (pixels) ----------
+  function clampDim(value, max) {
+    const v = Math.round(Number(value));
+    if (!isFinite(v) || v < 1) return 0;
+    return Math.min(v, max);
+  }
+
+  function setResizeDefaults(img) {
+    if (!resizeToggle) return;
+    aspect = img.naturalWidth / img.naturalHeight;
+    resizeToggle.checked = false;
+    resizeFields.hidden = true;
+    resizeWidth.value = img.naturalWidth;
+    resizeHeight.value = img.naturalHeight;
+    resizeNote.textContent = '';
+  }
+
+  function updateHeightFromWidth() {
+    if (!originalImage || !resizeLock.checked) return;
+    const w = clampDim(resizeWidth.value, originalImage.naturalWidth);
+    if (w) resizeHeight.value = Math.max(1, Math.min(originalImage.naturalHeight, Math.round(w / aspect)));
+  }
+
+  function updateWidthFromHeight() {
+    if (!originalImage || !resizeLock.checked) return;
+    const h = clampDim(resizeHeight.value, originalImage.naturalHeight);
+    if (h) resizeWidth.value = Math.max(1, Math.min(originalImage.naturalWidth, Math.round(h * aspect)));
+  }
+
+  function showResizeNote() {
+    if (!originalImage) return;
+    const w = Number(resizeWidth.value), h = Number(resizeHeight.value);
+    if (w > originalImage.naturalWidth || h > originalImage.naturalHeight) {
+      resizeNote.textContent = 'Images are not enlarged, so the largest size is the original: ' +
+        originalImage.naturalWidth + ' × ' + originalImage.naturalHeight + ' px.';
+    } else {
+      resizeNote.textContent = '';
+    }
+  }
+
+  if (resizeToggle) {
+    resizeToggle.addEventListener('change', () => { resizeFields.hidden = !resizeToggle.checked; });
+    resizeWidth.addEventListener('input', () => { updateHeightFromWidth(); showResizeNote(); });
+    resizeHeight.addEventListener('input', () => { updateWidthFromHeight(); showResizeNote(); });
+    resizeLock.addEventListener('change', () => { if (resizeLock.checked) updateHeightFromWidth(); });
+    document.querySelectorAll('.resize-preset').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (!originalImage) return;
+        const pct = Number(btn.dataset.pct) / 100;
+        resizeWidth.value = Math.max(1, Math.round(originalImage.naturalWidth * pct));
+        resizeHeight.value = Math.max(1, Math.round(originalImage.naturalHeight * pct));
+        resizeNote.textContent = '';
+      });
+    });
+  }
+
+  // Returns { w, h, resized } or null if the entered size is not valid.
+  function getOutputSize(img) {
+    const ow = img.naturalWidth, oh = img.naturalHeight;
+    if (!resizeToggle || !resizeToggle.checked) return { w: ow, h: oh, resized: false };
+    const w = clampDim(resizeWidth.value, ow);
+    const h = clampDim(resizeHeight.value, oh);
+    if (!w || !h) return null;
+    return { w, h, resized: w < ow || h < oh };
+  }
+
+  // Scales down in halving steps first, which keeps big reductions sharper.
+  function drawScaled(img, w, h) {
+    let src = img;
+    let sw = img.naturalWidth, sh = img.naturalHeight;
+    while (sw / 2 >= w && sh / 2 >= h) {
+      const step = document.createElement('canvas');
+      step.width = Math.max(1, Math.floor(sw / 2));
+      step.height = Math.max(1, Math.floor(sh / 2));
+      const sctx = step.getContext('2d');
+      sctx.imageSmoothingQuality = 'high';
+      sctx.drawImage(src, 0, 0, step.width, step.height);
+      src = step; sw = step.width; sh = step.height;
+    }
+    const canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(src, 0, 0, w, h);
+    return canvas;
   }
 
   imageInput.addEventListener('change', (e) => {
@@ -62,6 +160,7 @@
       $('originalDimensions').textContent = `${img.naturalWidth} × ${img.naturalHeight} px`;
       $('originalSize').textContent = formatFileSize(file.size);
       $('originalFormat').textContent = file.type.split('/')[1].toUpperCase();
+      setResizeDefaults(img);
       originalSpecs.style.display = 'block';
     };
     img.onerror = () => say('This image could not be read. It may be corrupted.');
@@ -80,12 +179,20 @@
 
   function compressImage(img, quality) {
     say('');
+    const dims = getOutputSize(img);
+    if (!dims) { say('Enter a width and height of at least 1 pixel, or turn resizing off.'); return; }
+    lastDims = dims;
     compressBtn.disabled = true;
     try {
-      const canvas = document.createElement('canvas');
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      canvas.getContext('2d').drawImage(img, 0, 0);
+      let canvas;
+      if (dims.resized) {
+        canvas = drawScaled(img, dims.w, dims.h);
+      } else {
+        canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        canvas.getContext('2d').drawImage(img, 0, 0);
+      }
 
       // Keep the original format: JPG stays JPG, PNG stays PNG, WebP stays WebP.
       const outType = originalFile.type;
@@ -122,8 +229,10 @@
     compressBtn.disabled = false;
     if (!blob) { say('Compression failed. The image may be too large for your browser.'); return; }
 
+    const resized = !!(lastDims && lastDims.resized);
     const unsupported = blob.type !== outType; // e.g. Safari cannot encode WebP
-    const keepOriginal = unsupported || blob.size >= originalFile.size;
+    // If the user asked for a resize, always give them the resized file.
+    const keepOriginal = unsupported || (!resized && blob.size >= originalFile.size);
     const result = keepOriginal ? originalFile : blob;
 
     if (resultUrl) URL.revokeObjectURL(resultUrl);
@@ -138,13 +247,16 @@
     downloadBtn.href = resultUrl;
     downloadBtn.download = originalFile.name.replace(/\.[^.]+$/, '') + '-compressed.' + ext;
 
+    const dimsText = resized ? ` Resized to ${lastDims.w} × ${lastDims.h} px.` : '';
     if (unsupported) {
       ratioDisplay.textContent = "Your browser can't encode this format, so your original is kept.";
     } else if (keepOriginal) {
       ratioDisplay.textContent = 'This image is already well optimized, so your original is kept.';
-    } else {
+    } else if (result.size < originalFile.size) {
       const pct = ((originalFile.size - result.size) / originalFile.size * 100).toFixed(1);
-      ratioDisplay.textContent = `Size reduced by ${pct}% (saved as ${ext.toUpperCase()})`;
+      ratioDisplay.textContent = `Size reduced by ${pct}% (saved as ${ext.toUpperCase()}).${dimsText}`;
+    } else {
+      ratioDisplay.textContent = `Saved as ${ext.toUpperCase()}.${dimsText} The file is not smaller than the original at this quality, so try a lower quality.`;
     }
     ratioDisplay.style.display = 'block';
     outputContainer.style.display = 'block';
