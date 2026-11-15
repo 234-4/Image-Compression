@@ -63,7 +63,7 @@
    "name": "Does compressing an image change its pixel size?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Usually not. Compression reduces the file size while keeping the same width and height. The exception is a PNG that cannot reach the target on an exact-size page, which our tool scales down slightly."
+    "text": "Usually not. Compression reduces the file size while keeping the same width and height, unless you choose to resize. The exception is a PNG that cannot reach the target on an exact-size page, which our tool scales down slightly."
    }
   },
   {
@@ -79,7 +79,7 @@
    "name": "Can I resize an image to exact pixels and an exact KB?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Yes, in two steps. First resize to the exact pixels in an editor, then compress to the KB limit with a size tool. Do the pixels first, because compressing first and resizing later can change the file size."
+    "text": "Yes, in two steps. First resize to the exact pixels, which our main compressor can do, then compress to the KB limit with a size tool. Do the pixels first, because resizing after compressing changes the file size again."
    }
   }
  ]
@@ -174,6 +174,7 @@ header.sh .sh-toggle{display:none}
 <li><strong>Windows:</strong> open the photo in Paint, choose <strong>Resize</strong>, switch to <strong>Pixels</strong>, keep <strong>Maintain aspect ratio</strong> ticked, enter a new width and save a copy.</li>
 <li><strong>Mac:</strong> open the photo in Preview and choose <strong>Tools → Adjust Size</strong>. Set the unit to pixels and enter the new width.</li>
 <li><strong>Any photo editor:</strong> look for Resize, Image Size or Scale.</li>
+<li><strong>Our image compressor:</strong> tick the optional resize box, enter a new width or height, and compress in the same step.</li>
 <li><strong>Cropping</strong> also reduces pixels, because you remove part of the picture.</li>
 </ul>
 <p>Keep the aspect ratio locked so the photo is not stretched, and avoid making an image larger than the original, which only makes it blurry. Menu names vary between versions, but the options are usually easy to find.</p>
@@ -188,12 +189,14 @@ header.sh .sh-toggle{display:none}
 <p>These are starting points. For websites in particular, <a href='/blog/ideal-image-size-for-website.html'>our guide to the ideal image size for a website</a> goes into more detail.</p>
 
 <h2>How can I resize an image online in pixels and KB?</h2>
-<p>The cleanest approach is a two-step process:</p>
+<p>You can do both in our <a href='/'>image compressor</a>, in one go:</p>
 <ol>
-<li><strong>Set the pixels.</strong> Resize the photo to the width and height you need, using one of the methods above.</li>
-<li><strong>Set the file size.</strong> Open our <a href='/'>image compressor</a>, choose the resized photo and compress it. If you need a specific limit, use a size page such as <a href='/compress-image-to-100kb.html'>compress to 100KB</a> and enter your target in kilobytes.</li>
+<li>Choose your photo.</li>
+<li>Tick <strong>Resize the image in pixels before compressing</strong>. Enter a new width or height, or use a quick size such as 50%. The aspect ratio stays locked by default so the photo is not stretched, and images are never enlarged.</li>
+<li>Set the quality slider and click <strong>Compress</strong>.</li>
+<li>Check the new dimensions and file size in the result, then download the file.</li>
 </ol>
-<p>Our tool works on file size, so use it after you have set the pixels. Everything runs in your browser, and nothing is uploaded. If you have a whole folder to process, <a href='/bulk-image-compressor.html'>the bulk compressor</a> handles up to 20 images at once. For forms with strict rules, <a href='/blog/how-to-reduce-image-size-for-online-forms.html'>this guide explains how to meet both size and format requirements</a>.</p>
+<p>The main tool uses a quality slider rather than a size target. If you need an exact limit in kilobytes, resize the photo there first, then use a size page such as <a href='/compress-image-to-100kb.html'>compress to 100KB</a> to reach your limit. Everything runs in your browser, and nothing is uploaded. For a folder of photos, <a href='/bulk-image-compressor.html'>the bulk compressor</a> can scale down every image wider than a maximum width you choose, up to 20 at a time. For forms with strict rules, <a href='/blog/how-to-reduce-image-size-for-online-forms.html'>this guide explains how to meet both size and format requirements</a>.</p>
 
 <h2>How do I reduce image size on a Google Pixel phone?</h2>
 <p>You have a few options, and they combine well:</p>
@@ -219,11 +222,11 @@ header.sh .sh-toggle{display:none}
 <h3>Does reducing pixel size reduce file size?</h3>
 <p>Almost always. Fewer pixels means less data to store, so a smaller image is usually a smaller file.</p>
 <h3>Does compressing an image change its pixel size?</h3>
-<p>Usually not. Compression reduces the file size while keeping the same width and height. The exception is a PNG that cannot reach the target on an exact-size page, which our tool scales down slightly.</p>
+<p>Usually not. Compression reduces the file size while keeping the same width and height, unless you choose to resize. The exception is a PNG that cannot reach the target on an exact-size page, which our tool scales down slightly.</p>
 <h3>What is a good pixel size for a photo to share online?</h3>
 <p>A width of about 1,200 to 2,000 pixels is plenty for most screens. Use smaller sizes for thumbnails and larger ones only if you plan to print.</p>
 <h3>Can I resize an image to exact pixels and an exact KB?</h3>
-<p>Yes, in two steps. First resize to the exact pixels in an editor, then compress to the KB limit with a size tool. Do the pixels first, because compressing first and resizing later can change the file size.</p>
+<p>Yes, in two steps. First resize to the exact pixels, which our main compressor can do, then compress to the KB limit with a size tool. Do the pixels first, because resizing after compressing changes the file size again.</p>
 
 <aside class="cta">
 <h2>Shrink the file size in seconds</h2>
