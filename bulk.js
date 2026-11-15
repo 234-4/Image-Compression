@@ -8,6 +8,7 @@
   const dropZone = $('bulkDrop');
   const rangeEl = $('bulkRange');
   const rangeVal = $('bulkRangeValue');
+  const maxWidthEl = $('bulkMaxWidth');
   const compressBtn = $('bulkCompressBtn');
   const clearBtn = $('bulkClearBtn');
   const zipBtn = $('bulkZipBtn');
@@ -108,22 +109,55 @@
 
   const tick = () => new Promise((r) => setTimeout(r, 0));
 
-  async function compressOne(file, quality) {
-    const img = await loadImage(file);
+  // Scales down in halving steps first, which keeps big reductions sharper.
+  function drawScaled(img, w, h) {
+    let src = img;
+    let sw = img.naturalWidth, sh = img.naturalHeight;
+    while (sw / 2 >= w && sh / 2 >= h) {
+      const step = document.createElement('canvas');
+      step.width = Math.max(1, Math.floor(sw / 2));
+      step.height = Math.max(1, Math.floor(sh / 2));
+      const sctx = step.getContext('2d');
+      sctx.imageSmoothingQuality = 'high';
+      sctx.drawImage(src, 0, 0, step.width, step.height);
+      src = step; sw = step.width; sh = step.height;
+    }
     const canvas = document.createElement('canvas');
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
+    canvas.width = w;
+    canvas.height = h;
     const ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0);
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(src, 0, 0, w, h);
+    return canvas;
+  }
+
+  async function compressOne(file, quality, maxW) {
+    const img = await loadImage(file);
+    let w = img.naturalWidth, h = img.naturalHeight, resized = false;
+    if (maxW > 0 && w > maxW) {            // only scale down, never enlarge
+      h = Math.max(1, Math.round(h * maxW / w));
+      w = maxW;
+      resized = true;
+    }
+
+    let canvas;
+    if (resized) {
+      canvas = drawScaled(img, w, h);
+    } else {
+      canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0);
+    }
+    const ctx = canvas.getContext('2d');
     const outType = file.type;
 
     let blob;
     if (outType === 'image/png' && window.UPNG && window.pako) {
       await tick();
-      const { width, height } = canvas;
-      const data = ctx.getImageData(0, 0, width, height).data;
+      const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
       const colors = quality >= 1 ? 0 : Math.max(16, Math.round(quality * 256));
-      const png = UPNG.encode([data.buffer], width, height, colors);
+      const png = UPNG.encode([data.buffer], canvas.width, canvas.height, colors);
       blob = new Blob([png], { type: 'image/png' });
     } else {
       blob = await new Promise((resolve) => canvas.toBlob(resolve, outType, quality));
@@ -132,8 +166,9 @@
 
     if (!blob) throw new Error('encode');
     const unsupported = blob.type !== outType;           // e.g. a browser that cannot encode WebP
-    const keepOriginal = unsupported || blob.size >= file.size;
-    return { blob: keepOriginal ? file : blob, kept: keepOriginal, unsupported };
+    // If the image was resized, always return the resized file.
+    const keepOriginal = unsupported || (!resized && blob.size >= file.size);
+    return { blob: keepOriginal ? file : blob, kept: keepOriginal, unsupported, resized, w, h };
   }
 
   function uniqueName(base, ext, used) {
@@ -155,6 +190,7 @@
     progressBar.value = 0;
     progressBar.max = items.length;
     const quality = rangeEl.value / 100;
+    const maxW = Math.max(0, parseInt(maxWidthEl && maxWidthEl.value, 10) || 0);
     const usedNames = new Set();
 
     // reset previous results
@@ -171,7 +207,7 @@
       it.cells.status.textContent = 'Compressing...';
       await tick();
       try {
-        const r = await compressOne(it.file, quality);
+        const r = await compressOne(it.file, quality, maxW);
         it.result = r.blob;
         const ext = r.blob.type.split('/')[1].replace('jpeg', 'jpg');
         const base = it.file.name.replace(/\.[^.]+$/, '') || 'image';
@@ -186,8 +222,8 @@
           it.cells.status.textContent = 'Already optimized, original kept';
         } else {
           const pct = ((it.file.size - r.blob.size) / it.file.size) * 100;
-          it.cells.saved.textContent = pct.toFixed(1) + '%';
-          it.cells.status.textContent = 'Done';
+          it.cells.saved.textContent = (pct > 0 ? pct.toFixed(1) : '0') + '%';
+          it.cells.status.textContent = r.resized ? 'Done (resized to ' + r.w + ' × ' + r.h + ' px)' : 'Done';
         }
         const a = document.createElement('a');
         a.href = it.url;
